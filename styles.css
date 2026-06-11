@@ -415,6 +415,22 @@ h1 {
   pointer-events: none;
 }
 
+.product-card.has-photo .product-media {
+  overflow: hidden;
+  padding: 0;
+  background: #ecece8;
+}
+
+.product-card.has-photo .product-media img {
+  object-fit: cover;
+  filter: none;
+  transition: transform 220ms ease;
+}
+
+.product-card.has-photo:hover .product-media img {
+  transform: scale(1.025);
+}
+
 .audience-tags {
   position: absolute;
   top: 10px;
@@ -567,6 +583,19 @@ h1 {
   max-height: 360px;
   object-fit: contain;
   filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.14));
+}
+
+.product-modal.has-photo .modal-media {
+  padding: 18px;
+  background: #ecece8;
+}
+
+.product-modal.has-photo .modal-media img {
+  width: 100%;
+  height: 100%;
+  max-height: 460px;
+  object-fit: contain;
+  filter: none;
 }
 
 .modal-content {

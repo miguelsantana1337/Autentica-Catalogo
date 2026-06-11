@@ -16,6 +16,7 @@ Site estático do catálogo interativo da Autêntica Professional.
 - Solicitação individual ou em grupo pelo WhatsApp.
 - Layout responsivo para desktop e celular.
 - Logo original e imagens extraídas do catálogo oficial.
+- Fotografias profissionais fornecidas na pasta compartilhada do Google Drive.
 
 ## Como abrir
 
@@ -39,6 +40,8 @@ Se o número ficar vazio, os botões usam `https://wa.me/?text=...` com a mensag
 - `styles.css`: visual responsivo.
 - `app.js`: base de produtos, filtros, modal e lista de interesse.
 - `assets/products`: imagens extraídas do PDF.
+- `assets/drive-products`: fotografias do Google Drive otimizadas em WebP.
+- `assets/drive-products/source-map.json`: relação entre cada produto e o arquivo original do Drive.
 - `assets/catalogo`: PDF original e páginas renderizadas para consulta.
 - `netlify.toml`: publicação estática, cache e cabeçalhos de segurança.
 
