@@ -1,50 +1,71 @@
-# Catálogo Interativo Autêntica Professional
+# Site Autêntica Professional
 
-Site estático do catálogo interativo da Autêntica Professional.
+Site institucional estático da Autêntica Professional, preparado para posicionamento de marca, geração de demanda, SEO técnico e descoberta por mecanismos de busca e sistemas de IA.
 
-## Site publicado
+## Páginas principais
 
-[autentica-professional-catalogo.netlify.app](https://autentica-professional-catalogo.netlify.app)
+- `/`: site institucional.
+- `/catalogo.html`: catálogo interativo com busca, filtros, pedido e WhatsApp.
+- `/links.html`: árvore de links para a bio do Instagram.
+- `/produtos/{slug}/`: 27 páginas indexáveis de produto.
+- `/guias/`: conteúdos editoriais sobre cuidado capilar.
+- `/obrigado/`: confirmação do formulário comercial.
 
-## Recursos
+## SEO e descoberta
 
-- 27 produtos organizados pela dor do cabelo ou etapa do serviço.
-- Busca por produto, ativo, indicação ou resultado.
-- Filtros por perfil: salão, cliente e revenda.
-- Páginas detalhadas em modal com ativos, indicação e resultado.
-- Lista de interesse persistente no navegador.
-- Solicitação individual ou em grupo pelo WhatsApp.
-- Layout responsivo para desktop e celular.
-- Logo original e imagens extraídas do catálogo oficial.
-- Fotografias profissionais fornecidas na pasta compartilhada do Google Drive.
+- HTML semântico e conteúdo principal renderizado no documento.
+- Metadados, URLs canônicas, Open Graph e Twitter Card.
+- Dados estruturados de organização, site, FAQ, artigos, produtos e breadcrumbs.
+- `sitemap.xml`, `robots.txt`, `llms.txt` e `produtos.json`.
+- Links internos entre homepage, catálogo, guias e produtos.
+- Páginas editoriais para buscas conversacionais.
 
-## Como abrir
+## Formulário comercial
 
-Abra `index.html` diretamente no navegador.
+O formulário usa Netlify Forms com o nome `contato-comercial` e redireciona para `/obrigado/`.
 
-O projeto não exige instalação, build ou dependências locais.
+Depois da publicação, habilite a detecção de formulários no Netlify e configure a notificação em **Project configuration > Notifications**.
 
-## WhatsApp
+## Pedido pelo WhatsApp
 
-O número temporário configurado é `+55 31 98567-4049`. Para trocar depois, edite a primeira linha de `app.js`:
+- Quantidade configurável em cada produto.
+- Pedido persistido no navegador.
+- Pré-qualificação com nome, perfil, salão/negócio, cidade, CEP, endereço, CNPJ opcional e observações.
+- Mensagem pronta para `+55 31 98567-4049`, com produtos e quantidades.
+- Nenhum preço B2B ou B2C é exposto publicamente.
+- Resultados do teste operacional em `TESTE-DE-ESTRESSE.md`.
 
-```js
-const WHATSAPP_NUMBER = "+55 31 98567-4049";
+## Árvore de links
+
+`links.html` possui quatro caminhos:
+
+- WhatsApp B2B para profissionais e salões.
+- WhatsApp B2C para uso pessoal.
+- Catálogo interativo com parâmetros UTM.
+- Site institucional com parâmetros UTM.
+
+O SLA e o padrão operacional estão em `OPERACAO-WHATSAPP.md`.
+
+## Gerar páginas de produto
+
+As páginas usam os dados de `app.js`. Depois de alterar o portfólio, execute:
+
+```bash
+SITE_URL=https://seu-dominio.com node scripts/generate-product-pages.mjs
 ```
 
-Se o número ficar vazio, os botões usam `https://wa.me/?text=...` com a mensagem do produto preenchida.
+O script recria as 27 páginas, `produtos.json` e `sitemap.xml`. Neste ambiente, pode ser necessário usar o caminho completo do Node fornecido pelo Codex.
 
-## Arquivos
+## Domínio
 
-- `index.html`: estrutura da interface.
-- `styles.css`: visual responsivo.
-- `app.js`: base de produtos, filtros, modal e lista de interesse.
-- `assets/products`: imagens extraídas do PDF.
-- `assets/drive-products`: fotografias do Google Drive otimizadas em WebP.
-- `assets/drive-products/source-map.json`: relação entre cada produto e o arquivo original do Drive.
-- `assets/catalogo`: PDF original e páginas renderizadas para consulta.
-- `netlify.toml`: publicação estática, cache e cabeçalhos de segurança.
+As URLs canônicas atuais usam `https://autentica-professional-catalogo.netlify.app`. Troque esse endereço pelo domínio institucional definitivo antes de enviar o sitemap ao Google Search Console.
 
-## Publicação
+## Desenvolvimento local
 
-O site está configurado para publicação estática no Netlify usando a raiz do repositório como diretório público.
+O projeto não exige instalação ou build. Sirva a raiz com qualquer servidor HTTP estático:
+
+```bash
+python3 -m http.server 4173
+```
+
+Acesse `http://127.0.0.1:4173/`.

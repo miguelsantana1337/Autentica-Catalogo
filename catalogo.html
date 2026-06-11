@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catálogo de Produtos | Autêntica Professional</title>
+    <meta
+      name="description"
+      content="Conheça as linhas Autêntica Professional para transformação, recuperação, loiros, terapia capilar, cachos, finalização e uso profissional."
+    >
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://autentica-professional-catalogo.netlify.app/catalogo.html">
+    <link rel="icon" href="assets/logo-autentica-original.webp" type="image/webp">
+    <link rel="preload" href="assets/drive-products/terra-acai.webp" as="image" type="image/webp">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Autêntica Professional, página inicial">
+        <span class="brand-symbol" aria-hidden="true"></span>
+        <span class="brand-wordmark" aria-hidden="true"></span>
+      </a>
+
+      <nav class="top-actions" aria-label="Ações principais">
+        <a class="ghost-link" href="/">Institucional</a>
+        <a class="ghost-link" href="assets/catalogo/autentica-catalogo-original.pdf" target="_blank" rel="noreferrer">
+          PDF
+        </a>
+        <a class="ghost-link" href="https://www.instagram.com/autenticaprofessional/" target="_blank" rel="noreferrer">
+          Instagram
+        </a>
+        <button class="interest-button" id="openInterest" type="button">
+          Pedido <span id="interestCount">0</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="catalog-intro" aria-labelledby="catalogTitle">
+        <div class="intro-copy">
+          <span class="eyebrow">Catálogo profissional</span>
+          <h1 id="catalogTitle">Escolha pela dor do cabelo ou pela etapa do serviço.</h1>
+          <p>
+            Produtos organizados para transformar atendimento em indicação rápida:
+            redução de volume, recuperação extrema, loiros, terapia capilar e finalização premium.
+          </p>
+        </div>
+
+        <form class="finder" id="searchForm" role="search">
+          <label for="searchInput">Buscar produto, ativo ou resultado</label>
+          <div class="search-row">
+            <input id="searchInput" type="search" placeholder="Ex: frizz, loiro, argan, queda">
+            <button id="clearSearch" type="button" aria-label="Limpar busca">Limpar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="controls" aria-label="Filtros do catálogo">
+        <div>
+          <span class="control-label">Dor ou etapa</span>
+          <div class="chip-row" id="painFilters"></div>
+        </div>
+
+        <div>
+          <span class="control-label">Perfil</span>
+          <div class="segmented" id="audienceFilters" role="tablist" aria-label="Filtro por perfil">
+            <button class="is-active" type="button" data-audience="all">Todos</button>
+            <button type="button" data-audience="b2b">Salão</button>
+            <button type="button" data-audience="b2c">Cliente</button>
+            <button type="button" data-audience="revenda">Revenda</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <aside class="summary-panel" aria-label="Resumo comercial">
+          <div class="panel-section">
+            <span class="control-label">Leitura rápida</span>
+            <p>
+              O portfólio combina químicas de alta rentabilidade para lavatório com finalizadores
+              de revenda rápida para manter a cliente comprando em casa.
+            </p>
+          </div>
+          <div class="metric-grid">
+            <div>
+              <strong id="visibleCount">0</strong>
+              <span>produtos</span>
+            </div>
+            <div>
+              <strong>6</strong>
+              <span>rotas</span>
+            </div>
+          </div>
+          <div class="panel-section">
+            <span class="control-label">Catálogo original</span>
+            <div class="catalog-preview">
+              <a href="assets/catalogo/page-1.jpg" target="_blank" rel="noreferrer">
+                <img src="assets/catalogo/page-1.webp" alt="Página 1 do catálogo Autêntica" loading="lazy" decoding="async">
+              </a>
+              <a href="assets/catalogo/page-2.jpg" target="_blank" rel="noreferrer">
+                <img src="assets/catalogo/page-2.webp" alt="Página 2 do catálogo Autêntica" loading="lazy" decoding="async">
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <section class="product-area" aria-live="polite">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow" id="currentContext">Todos os produtos</span>
+              <h2 id="sectionTitle">Catálogo Autêntica Professional</h2>
+            </div>
+            <button class="whatsapp-all" id="requestVisible" type="button">Revisar pedido</button>
+          </div>
+
+          <div class="product-grid" id="productGrid"></div>
+          <p class="empty-state" id="emptyState" hidden>Nenhum produto encontrado para este filtro.</p>
+        </section>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+    <section class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+      <button class="icon-button close-modal" id="closeModal" type="button" aria-label="Fechar">&times;</button>
+      <div class="modal-media">
+        <img id="modalImage" src="" alt="">
+      </div>
+      <div class="modal-content">
+        <span class="eyebrow" id="modalCategory"></span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <dl class="detail-list">
+          <div>
+            <dt>Ativos</dt>
+            <dd id="modalActives"></dd>
+          </div>
+          <div>
+            <dt>Indicação</dt>
+            <dd id="modalIndication"></dd>
+          </div>
+          <div>
+            <dt>Resultado</dt>
+            <dd id="modalResult"></dd>
+          </div>
+        </dl>
+        <div class="modal-order-row">
+          <span>Quantidade</span>
+          <div class="quantity-stepper" aria-label="Quantidade do produto">
+            <button type="button" id="modalDecrease" aria-label="Diminuir quantidade">−</button>
+            <output id="modalQuantity" aria-live="polite">0</output>
+            <button type="button" id="modalIncrease" aria-label="Aumentar quantidade">+</button>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="primary-link" id="modalWhatsapp" type="button">Comprar pelo WhatsApp</button>
+          <button class="secondary-button" id="modalAdd" type="button">Adicionar ao pedido</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="interest-drawer" id="interestDrawer" aria-label="Pedido e dados de atendimento" hidden>
+      <div class="drawer-head">
+        <div>
+          <span class="eyebrow">Pedido pelo WhatsApp</span>
+          <h2>Revise e envie</h2>
+        </div>
+        <button class="icon-button" id="closeInterest" type="button" aria-label="Fechar lista">&times;</button>
+      </div>
+      <div class="drawer-scroll">
+        <div class="interest-list" id="interestList"></div>
+        <form class="qualification-form" id="qualificationForm">
+          <div class="form-heading">
+            <span class="eyebrow">Dados para atendimento</span>
+            <p>Preencha para receber disponibilidade, prazo e condições corretas para o seu perfil.</p>
+          </div>
+
+          <label>
+            Seu nome
+            <input id="customerName" name="customerName" type="text" autocomplete="name" required>
+          </label>
+
+          <label>
+            Perfil de compra
+            <select id="customerProfile" name="customerProfile" required>
+              <option value="">Selecione</option>
+              <option value="Salão de beleza">Salão de beleza</option>
+              <option value="Profissional autônomo">Profissional autônomo</option>
+              <option value="Revendedor ou distribuidor">Revendedor ou distribuidor</option>
+              <option value="Cliente final">Cliente final</option>
+            </select>
+          </label>
+
+          <label id="businessNameLabel">
+            Nome do salão ou negócio
+            <input id="businessName" name="businessName" type="text" autocomplete="organization">
+          </label>
+
+          <div class="form-row">
+            <label>
+              Cidade / UF
+              <input id="customerCity" name="customerCity" type="text" autocomplete="address-level2" placeholder="Ex: Ipatinga / MG" required>
+            </label>
+            <label>
+              CEP
+              <input id="customerZip" name="customerZip" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required>
+            </label>
+          </div>
+
+          <label>
+            Endereço de entrega
+            <input id="customerAddress" name="customerAddress" type="text" autocomplete="street-address" placeholder="Rua, número, bairro e complemento" required>
+          </label>
+
+          <label>
+            CNPJ <span>(opcional)</span>
+            <input id="customerDocument" name="customerDocument" type="text" inputmode="numeric">
+          </label>
+
+          <label>
+            Observações <span>(opcional)</span>
+            <textarea id="customerNotes" name="customerNotes" rows="3" placeholder="Ex: melhor horário, urgência ou dúvida sobre os produtos"></textarea>
+          </label>
+
+          <div class="drawer-actions">
+            <button class="secondary-button" id="clearInterest" type="button">Limpar pedido</button>
+            <button class="primary-link" id="sendInterest" type="submit">Enviar no WhatsApp</button>
+          </div>
+        </form>
+      </div>
+    </aside>
+
+    <script src="app.js"></script>
+  </body>
+</html>

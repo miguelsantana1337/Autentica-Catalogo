@@ -1,0 +1,483 @@
+[
+  {
+    "slug": "terra-acai",
+    "name": "Terra Açaí",
+    "category": "Transformação",
+    "pain": "volume",
+    "audiences": [
+      "b2b"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/terra-acai.webp",
+    "photo": true,
+    "tagline": "Escova orgânica para liso total com saúde e força.",
+    "actives": "Blend orgânico.",
+    "indication": "Redução de volume, alinhamento e controle de frizz em serviços de salão.",
+    "result": "Alisamento total, fios mais fortes e acabamento saudavel.",
+    "description": "Indicada para profissionais que precisam entregar redução de volume com apelo orgânico e resultado visual de alto impacto.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/terra-acai/"
+  },
+  {
+    "slug": "ta-liso",
+    "name": "Tá Liso",
+    "category": "Transformação",
+    "pain": "volume",
+    "audiences": [
+      "b2b"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/ta-liso.webp",
+    "photo": true,
+    "tagline": "Escova sinérgica com ativação térmica.",
+    "actives": "Tecnologia termoativada pela prancha.",
+    "indication": "Alinhamento de cutículas e modelagem da nova forma dos fios.",
+    "result": "Fios alinhados, disciplinados e com liso potencializado.",
+    "description": "Linha de escova para redução de volume em serviços profissionais, pensada para selar e fixar o formato desejado.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/ta-liso/"
+  },
+  {
+    "slug": "reforce-xtreme-btx",
+    "name": "Reforce Xtreme BTX",
+    "category": "Transformação",
+    "pain": "volume",
+    "audiences": [
+      "b2b"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/reforce-xtreme-btx.webp",
+    "tagline": "Máscara termoativada para reposição de massa.",
+    "actives": "Repositor de massa com ação termoativada.",
+    "indication": "Todos os tipos de cabelo que precisam de selagem e disciplina.",
+    "result": "Fios lisos, selados e iluminados.",
+    "description": "BTX profissional para entregar efeito de selagem e acabamento polido enquanto ajuda a repor massa na fibra.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/reforce-xtreme-btx/"
+  },
+  {
+    "slug": "extrato-floresta-luxeplastica",
+    "name": "Extrato Floresta Luxeplástica",
+    "category": "Transformação",
+    "pain": "volume",
+    "audiences": [
+      "b2b"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/extrato-floresta-luxeplastica.webp",
+    "photo": true,
+    "tagline": "Luxeplástica com ativos da Amazônia.",
+    "actives": "Ativos da Floresta Amazônica e efeito orgânico.",
+    "indication": "Cauterização com redução de frizz e alinhamento das cutículas.",
+    "result": "Liso extreme, nutrição no córtex e brilho.",
+    "description": "Tratamento de transformação para profissionais que querem unir cauterização, definição e redução de volume em uma única oferta.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/extrato-floresta-luxeplastica/"
+  },
+  {
+    "slug": "btx-blond",
+    "name": "BTX Blond",
+    "category": "Transformação",
+    "pain": "volume",
+    "audiences": [
+      "b2b"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/btx-blond.webp",
+    "tagline": "Restaurador capilar com pigmento matizante.",
+    "actives": "Pigmentos matizantes para proteção da cor.",
+    "indication": "Cabelos cacheados, crespos ou indisciplinados com necessidade de reduzir volume.",
+    "result": "Reduz volume e minimiza oxidação da cor.",
+    "description": "Opção de redução de volume para fios com cor, pensada para evitar amarelamento e envelhecimento visual do cabelo.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/btx-blond/"
+  },
+  {
+    "slug": "ouro-argan",
+    "name": "Ouro Argan",
+    "category": "Reconstrução",
+    "pain": "recovery",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/ouro-argan.webp",
+    "photo": true,
+    "tagline": "Reconstrução para fibra quebradiça.",
+    "actives": "Argan e Monoi.",
+    "indication": "Fios quebradiços, opacos e enfraquecidos.",
+    "result": "Reparação profunda e recuperação da fibra capilar.",
+    "description": "Linha de cronograma capilar voltada para reconstrução essencial e recuperação de fios fragilizados.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/ouro-argan/"
+  },
+  {
+    "slug": "geleia-real",
+    "name": "Geleia Real",
+    "category": "Hidratação",
+    "pain": "recovery",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/geleia-real.webp",
+    "photo": true,
+    "tagline": "Hidratação inteligente com alta carga proteica.",
+    "actives": "Extrato de mel e proteínas.",
+    "indication": "Fios danificados que precisam repor água e nutrientes.",
+    "result": "Recupera, fortalece e protege a fibra.",
+    "description": "Tratamento equilibrante para trazer maciez, resistência e resposta mais rápida aos demais ativos do cronograma.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/geleia-real/"
+  },
+  {
+    "slug": "super-nutri",
+    "name": "Super Nutri",
+    "category": "Nutrição",
+    "pain": "recovery",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/super-nutri.webp",
+    "photo": true,
+    "tagline": "Fusão de lipídeos para pós-química.",
+    "actives": "Lipídeos e sistema nutritivo.",
+    "indication": "Pós-mechas, pós-progressiva e fios ressecados.",
+    "result": "Regenera o manto hidrolipídico e sela áreas porosas.",
+    "description": "Linha de nutricao para recuperar toque, flexibilidade e brilho em cabelos que passaram por processos quimicos.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/super-nutri/"
+  },
+  {
+    "slug": "morango-champagner",
+    "name": "Morango & Champagner",
+    "category": "Reposição de carbono",
+    "pain": "recovery",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/morango-champagner.webp",
+    "photo": true,
+    "tagline": "Reposição de carbono com vitaminas.",
+    "actives": "Vitaminas e ativos de reposição nutritiva.",
+    "indication": "Cabelos que precisam melhorar absorção de ativos.",
+    "result": "Fortalece a ligação entre aminoácidos e melhora reposição de nutrientes.",
+    "description": "Tratamento de alta performance para cronograma capilar, indicado quando a fibra precisa responder melhor aos ativos.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/morango-champagner/"
+  },
+  {
+    "slug": "sos",
+    "name": "S.O.S",
+    "category": "Hidro nutritivo",
+    "pain": "recovery",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/sos.webp",
+    "photo": true,
+    "tagline": "Linha anti-quebra e anti-pontas duplas.",
+    "actives": "Sistema hidro nutritivo para aumento de espessura do fio.",
+    "indication": "Fios descuticulados, quebradiços e com dificuldade de desembaraço.",
+    "result": "Reduz quebra, melhora desembaraço e encorpa a fibra.",
+    "description": "Tratamento para recuperar o aspecto de fios fragilizados, com foco em resistencia e toque.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/sos/"
+  },
+  {
+    "slug": "desfibrilador",
+    "name": "Desfibrilador",
+    "category": "Cauterização",
+    "pain": "recovery",
+    "audiences": [
+      "b2b"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/desfibrilador.webp",
+    "photo": true,
+    "tagline": "S.O.S. para emborrachamento e dano severo.",
+    "actives": "Queratina vegetal, Luna Matrix e ação acidificante.",
+    "indication": "Pontas danificadas, emborrachamento e fibra desestabilizada.",
+    "result": "Repõe massa, neutraliza química e reestrutura a fibra.",
+    "description": "Tratamento intenso para bancada profissional, criado para balancear pH e recuperar cabelos em estado critico.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/desfibrilador/"
+  },
+  {
+    "slug": "ampolas-3-etapas",
+    "name": "Ampolas 3 Etapas",
+    "category": "Cronograma rápido",
+    "pain": "recovery",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/ampolas-3-etapas.webp",
+    "photo": true,
+    "tagline": "Reconstrução, nutrição e hidratação em rotina rápida.",
+    "actives": "Óleos, lipídeos e ativos nutritivos.",
+    "indication": "Manutenção acelerada do cronograma capilar.",
+    "result": "Fortalece, nutre e devolve água para fios saudáveis.",
+    "description": "Kit compacto para transformar diagnostico em rotina simples de tres etapas essenciais.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/ampolas-3-etapas/"
+  },
+  {
+    "slug": "po-descolorante",
+    "name": "Pó Descolorante",
+    "category": "Loiros",
+    "pain": "blond",
+    "audiences": [
+      "b2b"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/po-descolorante.webp",
+    "tagline": "Clareamento para mechas, luzes e decapagem.",
+    "actives": "Sistema de descoloração profissional.",
+    "indication": "Técnicas de mechas, luzes e decapagens.",
+    "result": "Loiro luminoso com respeito à integridade dos fios.",
+    "description": "Produto obrigatório para salões que trabalham com transformações em loiros e precisam equilibrar técnica e segurança.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/po-descolorante/"
+  },
+  {
+    "slug": "black-platinum",
+    "name": "Black Platinum",
+    "category": "Loiros",
+    "pain": "blond",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/black-platinum.webp",
+    "photo": true,
+    "tagline": "Linha matizadora para efeito platinado.",
+    "actives": "Pigmentos especiais de alta tecnologia.",
+    "indication": "Cabelos loiros, descoloridos ou grisalhos.",
+    "result": "Efeito platinado e cor mais fria.",
+    "description": "Linha de manutencao para neutralizar tons indesejados e entregar um visual platinado em loiros e grisalhos.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/black-platinum/"
+  },
+  {
+    "slug": "silver-blond",
+    "name": "Silver Blond",
+    "category": "Loiros",
+    "pain": "blond",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/silver-blond.webp",
+    "tagline": "Revitalização de loiros e neutralização do amarelado.",
+    "actives": "Protein Collor, extrato violeta e complexo protetor.",
+    "indication": "Loiros com tonalidade amarelada.",
+    "result": "Elimina o amarelado e protege a cor.",
+    "description": "Tratamento de manutenção para tons loiros, com foco em brilho, proteção e efeito frio controlado.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/silver-blond/"
+  },
+  {
+    "slug": "vita-hair",
+    "name": "Vita Hair Vitamin Complex",
+    "category": "Terapia capilar",
+    "pain": "scalp",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/vita-hair.webp",
+    "photo": true,
+    "tagline": "Blend vitamínico para fios enfraquecidos.",
+    "actives": "Blend de vitaminas.",
+    "indication": "Fios fracos após dengue, zika, chikungunya, covid-19 ou queda intensa.",
+    "result": "Estimula crescimento e devolve força e brilho.",
+    "description": "Linha voltada para terapia capilar e retencao de clientes que buscam fortalecer fios fragilizados.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/vita-hair/"
+  },
+  {
+    "slug": "therapy-detox",
+    "name": "Therapy Detox",
+    "category": "Terapia capilar",
+    "pain": "scalp",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/therapy-detox.webp",
+    "photo": true,
+    "tagline": "Shampoo purificante para couro cabeludo equilibrado.",
+    "actives": "Ingredientes detoxificantes e naturais.",
+    "indication": "Acúmulo de resíduos, oleosidade e sensação de peso.",
+    "result": "Remove impurezas, equilibra o couro cabeludo e traz frescor.",
+    "description": "Produto de entrada para protocolos de limpeza profunda, preparando a fibra para melhor resposta aos tratamentos.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/therapy-detox/"
+  },
+  {
+    "slug": "coffee",
+    "name": "Coffee",
+    "category": "Terapia capilar",
+    "pain": "scalp",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/coffee.webp",
+    "photo": true,
+    "tagline": "Tratamento com cafeína para crescimento.",
+    "actives": "Cafeína.",
+    "indication": "Queda, crescimento lento e folículos enfraquecidos.",
+    "result": "Estimula circulação no couro cabeludo e fortalece os fios.",
+    "description": "Linha de tratamento para quem precisa de uma narrativa clara de crescimento, força e estimulação capilar.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/coffee/"
+  },
+  {
+    "slug": "super-cachos",
+    "name": "Super Cachos",
+    "category": "Cachos",
+    "pain": "scalp",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/super-cachos.webp",
+    "photo": true,
+    "tagline": "Definição, memória do cacho e controle de frizz.",
+    "actives": "Sistema de tratamento para cabelos ondulados, cacheados e crespos.",
+    "indication": "Todas as curvaturas que precisam de definição e movimento natural.",
+    "result": "Reativa memória dos cachos, reduz volume e elimina frizz.",
+    "description": "Linha para valorizar curvaturas com brilho, balanco e forma definida sem perder naturalidade.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/super-cachos/"
+  },
+  {
+    "slug": "inspira-parfum",
+    "name": "Inspira Parfum",
+    "category": "Finalização",
+    "pain": "finish",
+    "audiences": [
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/inspira-parfum.webp",
+    "photo": true,
+    "tagline": "Perfume capilar com blend de nutrientes.",
+    "actives": "Blend nutritivo e fragrância luxuosa.",
+    "indication": "Finalização de atendimento e venda por encantamento olfativo.",
+    "result": "Perfuma, hidrata e dá brilho aos fios.",
+    "description": "Finalizador premium para gerar desejo imediato no lavatório e facilitar a revenda para manutenção em casa.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/inspira-parfum/"
+  },
+  {
+    "slug": "use-me-parfum",
+    "name": "Use-Me Parfum",
+    "category": "Finalização",
+    "pain": "finish",
+    "audiences": [
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/use-me-parfum.webp",
+    "tagline": "Fragrância marcante com proteção solar.",
+    "actives": "Fragrância capilar, proteção solar e anti-frizz.",
+    "indication": "Fios alinhados e saudáveis que pedem perfume e brilho.",
+    "result": "Perfume intenso, proteção e controle de frizz.",
+    "description": "Produto de ticket rapido para a cliente levar a experiencia do salao para a rotina.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/use-me-parfum/"
+  },
+  {
+    "slug": "parfum-ouro-argan",
+    "name": "Parfum Ouro Argan",
+    "category": "Finalização",
+    "pain": "finish",
+    "audiences": [
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/parfum-ouro-argan.webp",
+    "tagline": "Perfume reconstrutor com textura leve.",
+    "actives": "Óleos vegetais.",
+    "indication": "Fios que precisam de perfume, resistência e vitalidade sem peso.",
+    "result": "Reconstrução leve, maciez intensa e controle de frizz.",
+    "description": "Finalizador com proposta de luxo e tratamento, ideal para complementar servicos de reconstrucao.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/parfum-ouro-argan/"
+  },
+  {
+    "slug": "oleo-reparador-ouro-argan",
+    "name": "Óleo Reparador Ouro Argan",
+    "category": "Finalização",
+    "pain": "finish",
+    "audiences": [
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/oleo-reparador-ouro-argan.webp",
+    "photo": true,
+    "tagline": "Óleo de tratamento com brilho radiante.",
+    "actives": "Óleo de Argan e Óleo de Monoi.",
+    "indication": "Fios com frizz, opacidade e pontas ressecadas.",
+    "result": "Nutre profundamente, elimina frizz e restaura brilho.",
+    "description": "Elixir de tratamento para vender no checkout e reforçar o resultado visual do serviço.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/oleo-reparador-ouro-argan/"
+  },
+  {
+    "slug": "luxe-oil-spa",
+    "name": "Luxe Oil Spa",
+    "category": "Finalização",
+    "pain": "finish",
+    "audiences": [
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/luxe-oil-spa.webp",
+    "tagline": "Reconstrução total com toque de brilho.",
+    "actives": "Sistema reparador com proteção solar.",
+    "indication": "Cabelos que precisam de reparação profunda e acabamento impecável.",
+    "result": "Protege dos danos solares e recupera brilho.",
+    "description": "Óleo premium para finalizar serviços de tratamento e manter sensação de cabelo tratado por mais tempo.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/luxe-oil-spa/"
+  },
+  {
+    "slug": "acai-oil",
+    "name": "Açaí Oil",
+    "category": "Finalização",
+    "pain": "finish",
+    "audiences": [
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/acai-oil.webp",
+    "tagline": "Alto poder nutritivo com proteção térmica.",
+    "actives": "Omegas 3 e 9 e vitaminas.",
+    "indication": "Fios que precisam selar cutícula e combater radicais livres.",
+    "result": "Sela, nutre, protege do calor e restaura a fibra.",
+    "description": "Óleo nutritivo para rotina de finalização, indicado para brilho rápido e proteção antes de fonte de calor.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/acai-oil/"
+  },
+  {
+    "slug": "ta-liso-zero-frizz",
+    "name": "Tá Liso Zero Frizz",
+    "category": "Finalização",
+    "pain": "finish",
+    "audiences": [
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/ta-liso-zero-frizz.webp",
+    "tagline": "Óleo pós-selagem com proteção térmica 230 graus.",
+    "actives": "Sistema leve de blindagem de cutículas.",
+    "indication": "Cabelos com química, frizz e pontas duplas.",
+    "result": "Blinda cutículas, prolonga o liso e entrega brilho espelhado.",
+    "description": "Finalizador ideal para clientes que fizeram selagem ou progressiva e precisam manter o resultado em casa.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/ta-liso-zero-frizz/"
+  },
+  {
+    "slug": "perfect-argan-macadamia",
+    "name": "Perfect Argan e Macadâmia",
+    "category": "Lavatório",
+    "pain": "lavatory",
+    "audiences": [
+      "b2b"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/perfect-argan-macadamia.webp",
+    "photo": true,
+    "tagline": "Shampoo e condicionador profissional em galão 5L.",
+    "actives": "Argan e macadâmia.",
+    "indication": "Operação de alto giro em lavatórios profissionais.",
+    "result": "Hidratação com custo-benefício para rotina do salão.",
+    "description": "Linha operacional para salões que precisam de rendimento, padronização de atendimento e boa experiência no lavatório.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/perfect-argan-macadamia/"
+  }
+]

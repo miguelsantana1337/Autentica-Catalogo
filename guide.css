@@ -1,0 +1,64 @@
+.guide-page { background: var(--paper-soft); }
+.guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 78px;
+  padding: 12px max(24px, calc((100vw - var(--max)) / 2));
+  border-bottom: 1px solid var(--line);
+}
+.guide-header nav { display: flex; align-items: center; gap: 26px; }
+.guide-header nav a { font-size: 13px; font-weight: 800; text-decoration: none; }
+.guide-header .nav-cta { color: #fff; }
+.guide-breadcrumbs { display: flex; gap: 8px; padding-block: 22px; color: var(--muted); font-size: 11px; }
+.guide-breadcrumbs a { text-decoration: none; }
+.guide-hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); gap: 8vw; padding-block: 80px 100px; }
+.guide-hero h1 { max-width: 920px; margin: 0; font-family: Georgia, serif; font-size: clamp(58px, 7vw, 108px); font-weight: 400; line-height: .88; letter-spacing: -.055em; }
+.guide-hero-side { align-self: end; border-top: 1px solid var(--ink); padding-top: 22px; }
+.guide-hero-side > p { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.6; }
+.guide-meta { display: flex; gap: 18px; margin-top: 28px; color: var(--red); font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.guide-content { padding-block: 90px 120px; background: var(--paper); }
+.guide-layout { display: grid; grid-template-columns: 250px minmax(0, 760px); gap: 8vw; justify-content: center; }
+.guide-index { position: sticky; top: 110px; align-self: start; padding-top: 16px; border-top: 1px solid var(--ink); }
+.guide-index strong { display: block; margin-bottom: 14px; color: var(--red); font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+.guide-index a { display: block; padding: 8px 0; color: var(--muted); font-size: 13px; text-decoration: none; }
+.guide-article h2 { margin: 70px 0 20px; font-family: Georgia, serif; font-size: clamp(37px, 4vw, 55px); font-weight: 400; line-height: 1; letter-spacing: -.04em; }
+.guide-article h2:first-child { margin-top: 0; }
+.guide-article h3 { margin: 35px 0 12px; font-family: Georgia, serif; font-size: 27px; font-weight: 400; }
+.guide-article p, .guide-article li { color: #514c47; font-size: 17px; line-height: 1.75; }
+.guide-article ul, .guide-article ol { padding-left: 22px; }
+.guide-article li { margin-bottom: 10px; }
+.answer-box { margin: 38px 0; padding: 28px; border-left: 4px solid var(--red); background: var(--paper-soft); }
+.answer-box strong { display: block; margin-bottom: 9px; color: var(--red-deep); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+.answer-box p { margin: 0; color: var(--ink); font-family: Georgia, serif; font-size: 24px; line-height: 1.35; }
+.care-table { width: 100%; margin: 30px 0; border-collapse: collapse; }
+.care-table th, .care-table td { padding: 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.care-table th { color: var(--red); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.care-table td { color: #514c47; line-height: 1.5; }
+.guide-cta { margin-top: 76px; padding: 38px; color: #fff; background: var(--ink); }
+.guide-cta h2 { margin: 0 0 16px; color: #fff; }
+.guide-cta p { color: rgba(255,255,255,.68); }
+.guide-cta .button { margin-top: 12px; }
+.guide-footer { padding-block: 28px; color: rgba(255,255,255,.56); background: #0d0c0b; }
+.guide-footer > div { display: flex; gap: 28px; }
+.guide-footer strong { margin-right: auto; color: #fff; }
+.guide-footer a { color: inherit; font-size: 12px; }
+@media (max-width: 820px) {
+  .guide-header nav a:not(.nav-cta) { display: none; }
+  .guide-hero { grid-template-columns: 1fr; gap: 50px; padding-block: 60px 80px; }
+  .guide-hero h1 { font-size: 15vw; }
+  .guide-layout { grid-template-columns: 1fr; }
+  .guide-index { position: static; }
+  .guide-index a { display: inline-block; margin-right: 14px; }
+  .care-table { display: block; overflow-x: auto; }
+}
+@media (max-width: 520px) {
+  .guide-header { padding-inline: 16px; }
+  .guide-header .brand-name { display: none; }
+  .guide-header .nav-cta { padding: 11px 13px; }
+  .guide-content { padding-block: 70px 90px; }
+  .guide-article p, .guide-article li { font-size: 16px; }
+  .guide-cta { padding: 26px; }
+  .guide-footer > div { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .guide-footer strong { margin-right: 0; }
+}

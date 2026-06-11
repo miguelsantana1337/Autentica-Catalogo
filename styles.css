@@ -30,7 +30,9 @@ body {
 }
 
 button,
-input {
+input,
+select,
+textarea {
   font: inherit;
 }
 
@@ -72,7 +74,7 @@ img {
 .brand-wordmark {
   display: block;
   flex: 0 0 auto;
-  background-image: url("assets/logo-autentica-original.png");
+  background-image: url("assets/logo-autentica-original.webp");
   background-repeat: no-repeat;
 }
 
@@ -232,11 +234,20 @@ h1 {
 }
 
 .controls {
+  position: sticky;
+  top: 72px;
+  z-index: 15;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   align-items: end;
   margin-bottom: 18px;
+  padding: 12px;
+  border: 1px solid rgba(222, 222, 216, 0.9);
+  border-radius: 8px;
+  background: rgba(247, 247, 244, 0.96);
+  box-shadow: 0 8px 22px rgba(18, 18, 18, 0.06);
+  backdrop-filter: blur(14px);
 }
 
 .controls > div {
@@ -497,7 +508,7 @@ h1 {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 44px;
+  grid-template-columns: 0.8fr 1fr;
   gap: 8px;
   margin-top: auto;
 }
@@ -513,15 +524,75 @@ h1 {
 
 .details-button {
   border: 1px solid var(--ink);
-  background: var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.buy-button {
+  border: 1px solid var(--red);
+  background: var(--red);
   color: #fff;
 }
 
-.add-button {
+.product-order-row,
+.modal-order-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.product-order-row > span,
+.modal-order-row > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.quantity-stepper {
+  display: grid;
+  grid-template-columns: 36px 42px 36px;
+  align-items: center;
+  width: 114px;
+  height: 38px;
+  overflow: hidden;
   border: 1px solid var(--line);
+  border-radius: 8px;
   background: var(--surface);
-  color: var(--red);
-  font-size: 22px;
+}
+
+.quantity-stepper button,
+.quantity-stepper output {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.quantity-stepper button {
+  border: 0;
+  background: var(--surface-strong);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.quantity-stepper output {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.quantity-stepper-small {
+  grid-template-columns: 30px 34px 30px;
+  width: 94px;
+  height: 32px;
+  margin-top: 8px;
+}
+
+.quantity-stepper-small button {
+  font-size: 16px;
 }
 
 .empty-state {
@@ -660,8 +731,8 @@ h1 {
   right: 0;
   z-index: 70;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  width: min(420px, 100vw);
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(520px, 100vw);
   height: 100vh;
   border-left: 1px solid var(--line);
   background: var(--surface);
@@ -683,9 +754,13 @@ h1 {
   font-size: 22px;
 }
 
-.interest-list {
+.drawer-scroll {
   overflow: auto;
-  padding: 12px 16px;
+  overscroll-behavior: contain;
+}
+
+.interest-list {
+  padding: 12px 16px 4px;
 }
 
 .interest-item {
@@ -732,13 +807,86 @@ h1 {
 }
 
 .drawer-actions {
+  position: sticky;
+  bottom: 0;
   border-top: 1px solid var(--line);
   border-bottom: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
 }
 
 .drawer-actions .primary-link,
 .drawer-actions .secondary-button {
   flex: 1;
+}
+
+.qualification-form {
+  display: grid;
+  gap: 13px;
+  padding: 18px 16px 0;
+  border-top: 1px solid var(--line);
+}
+
+.form-heading p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.qualification-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.qualification-form label > span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.qualification-form label.is-required::after {
+  content: "Obrigatório para este perfil";
+  color: var(--red-dark);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.qualification-form input,
+.qualification-form select,
+.qualification-form textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.qualification-form textarea {
+  min-height: 86px;
+  resize: vertical;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 0.65fr;
+  gap: 10px;
+}
+
+.qualification-form .drawer-actions {
+  margin: 4px -16px 0;
+}
+
+.primary-link:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
 [hidden] {
@@ -772,6 +920,10 @@ h1 {
   .summary-panel {
     position: static;
     order: 2;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
   }
 
   .product-area {
@@ -824,6 +976,10 @@ h1 {
 
   .controls {
     gap: 18px;
+    top: 70px;
+    margin-right: -8px;
+    margin-left: -8px;
+    padding: 10px 8px;
   }
 
   .chip-row,
@@ -867,6 +1023,10 @@ h1 {
   .section-head h2,
   .modal-content h2 {
     font-size: 28px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
   }
 
 }

@@ -1,13 +1,15 @@
 const WHATSAPP_NUMBER = "+55 31 98567-4049";
+const TRANSPARENT_PIXEL = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+const REQUESTED_PRODUCT_SLUG = new URLSearchParams(window.location.search).get("produto");
 
 const pains = [
   { id: "all", label: "Todos", title: "Catálogo Autêntica Professional", context: "Todos os produtos" },
-  { id: "volume", label: "Alisar e reduzir frizz", title: "Transformação e redução de volume", context: "Foco forte B2B" },
-  { id: "recovery", label: "Salvar cabelo quebrado", title: "Cronograma e recuperação extrema", context: "Tratamentos B2B e B2C" },
-  { id: "blond", label: "Loiros e descoloração", title: "Especial loiros e descoloração", context: "Química pesada e manutenção" },
-  { id: "scalp", label: "Crescimento e couro", title: "Terapia capilar e cuidados específicos", context: "Nicho e retenção" },
-  { id: "finish", label: "Finalização e revenda", title: "Finalização premium", context: "Upsell de lavatório" },
-  { id: "lavatory", label: "Rentabilidade no lavatório", title: "Operação profissional", context: "Exclusivo B2B" },
+  { id: "volume", label: "Redução de volume", title: "Transformação e redução de volume", context: "Foco forte B2B" },
+  { id: "recovery", label: "Cronograma capilar", title: "Cronograma e recuperação extrema", context: "Tratamentos B2B e B2C" },
+  { id: "blond", label: "Loiros / descoloração", title: "Especial loiros e descoloração", context: "Química pesada e manutenção" },
+  { id: "scalp", label: "Terapia capilar", title: "Terapia capilar e cuidados específicos", context: "Nicho e retenção" },
+  { id: "finish", label: "Finalizadores", title: "Finalização premium", context: "Upsell de lavatório" },
+  { id: "lavatory", label: "Uso profissional", title: "Operação profissional", context: "Exclusivo B2B" },
 ];
 
 const products = [
@@ -47,7 +49,7 @@ const products = [
     category: "Transformação",
     pain: "volume",
     audiences: ["b2b"],
-    image: "assets/products/reforce-xtreme-btx.png",
+    image: "assets/products/reforce-xtreme-btx.webp",
     tagline: "Máscara termoativada para reposição de massa.",
     actives: "Repositor de massa com ação termoativada.",
     indication: "Todos os tipos de cabelo que precisam de selagem e disciplina.",
@@ -76,7 +78,7 @@ const products = [
     category: "Transformação",
     pain: "volume",
     audiences: ["b2b"],
-    image: "assets/products/btx-blond.png",
+    image: "assets/products/btx-blond.webp",
     tagline: "Restaurador capilar com pigmento matizante.",
     actives: "Pigmentos matizantes para proteção da cor.",
     indication: "Cabelos cacheados, crespos ou indisciplinados com necessidade de reduzir volume.",
@@ -195,7 +197,7 @@ const products = [
     category: "Loiros",
     pain: "blond",
     audiences: ["b2b"],
-    image: "assets/products/po-descolorante.png",
+    image: "assets/products/po-descolorante.webp",
     tagline: "Clareamento para mechas, luzes e decapagem.",
     actives: "Sistema de descoloração profissional.",
     indication: "Técnicas de mechas, luzes e decapagens.",
@@ -224,7 +226,7 @@ const products = [
     category: "Loiros",
     pain: "blond",
     audiences: ["b2b", "b2c", "revenda"],
-    image: "assets/products/silver-blond.png",
+    image: "assets/products/silver-blond.webp",
     tagline: "Revitalização de loiros e neutralização do amarelado.",
     actives: "Protein Collor, extrato violeta e complexo protetor.",
     indication: "Loiros com tonalidade amarelada.",
@@ -313,7 +315,7 @@ const products = [
     category: "Finalização",
     pain: "finish",
     audiences: ["b2c", "revenda"],
-    image: "assets/products/use-me-parfum.png",
+    image: "assets/products/use-me-parfum.webp",
     tagline: "Fragrância marcante com proteção solar.",
     actives: "Fragrância capilar, proteção solar e anti-frizz.",
     indication: "Fios alinhados e saudáveis que pedem perfume e brilho.",
@@ -327,7 +329,7 @@ const products = [
     category: "Finalização",
     pain: "finish",
     audiences: ["b2c", "revenda"],
-    image: "assets/products/parfum-ouro-argan.png",
+    image: "assets/products/parfum-ouro-argan.webp",
     tagline: "Perfume reconstrutor com textura leve.",
     actives: "Óleos vegetais.",
     indication: "Fios que precisam de perfume, resistência e vitalidade sem peso.",
@@ -356,7 +358,7 @@ const products = [
     category: "Finalização",
     pain: "finish",
     audiences: ["b2c", "revenda"],
-    image: "assets/products/luxe-oil-spa.png",
+    image: "assets/products/luxe-oil-spa.webp",
     tagline: "Reconstrução total com toque de brilho.",
     actives: "Sistema reparador com proteção solar.",
     indication: "Cabelos que precisam de reparação profunda e acabamento impecável.",
@@ -370,7 +372,7 @@ const products = [
     category: "Finalização",
     pain: "finish",
     audiences: ["b2c", "revenda"],
-    image: "assets/products/acai-oil.png",
+    image: "assets/products/acai-oil.webp",
     tagline: "Alto poder nutritivo com proteção térmica.",
     actives: "Omegas 3 e 9 e vitaminas.",
     indication: "Fios que precisam selar cutícula e combater radicais livres.",
@@ -384,7 +386,7 @@ const products = [
     category: "Finalização",
     pain: "finish",
     audiences: ["b2c", "revenda"],
-    image: "assets/products/ta-liso-zero-frizz.png",
+    image: "assets/products/ta-liso-zero-frizz.webp",
     tagline: "Óleo pós-selagem com proteção térmica 230 graus.",
     actives: "Sistema leve de blindagem de cutículas.",
     indication: "Cabelos com química, frizz e pontas duplas.",
@@ -409,11 +411,29 @@ const products = [
   },
 ];
 
+function readStoredJson(key, fallback) {
+  try {
+    return JSON.parse(localStorage.getItem(key) || "") || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+const savedQuantities = readStoredJson("autentica-order", {});
+const legacyInterest = readStoredJson("autentica-interest", []);
+
+if (!Object.keys(savedQuantities).length && Array.isArray(legacyInterest)) {
+  legacyInterest.forEach((slug) => {
+    savedQuantities[slug] = 1;
+  });
+}
+
 const state = {
-  pain: "all",
-  audience: "all",
+  pain: new URLSearchParams(window.location.search).get("linha") || "all",
+  audience: new URLSearchParams(window.location.search).get("perfil") || "all",
   search: "",
-  interest: new Set(JSON.parse(localStorage.getItem("autentica-interest") || "[]")),
+  quantities: savedQuantities,
+  modalProductSlug: null,
 };
 
 const audienceLabels = {
@@ -446,6 +466,9 @@ const elements = {
   modalResult: document.querySelector("#modalResult"),
   modalWhatsapp: document.querySelector("#modalWhatsapp"),
   modalAdd: document.querySelector("#modalAdd"),
+  modalDecrease: document.querySelector("#modalDecrease"),
+  modalIncrease: document.querySelector("#modalIncrease"),
+  modalQuantity: document.querySelector("#modalQuantity"),
   openInterest: document.querySelector("#openInterest"),
   closeInterest: document.querySelector("#closeInterest"),
   interestDrawer: document.querySelector("#interestDrawer"),
@@ -453,6 +476,16 @@ const elements = {
   interestList: document.querySelector("#interestList"),
   clearInterest: document.querySelector("#clearInterest"),
   sendInterest: document.querySelector("#sendInterest"),
+  qualificationForm: document.querySelector("#qualificationForm"),
+  customerName: document.querySelector("#customerName"),
+  customerProfile: document.querySelector("#customerProfile"),
+  businessName: document.querySelector("#businessName"),
+  businessNameLabel: document.querySelector("#businessNameLabel"),
+  customerCity: document.querySelector("#customerCity"),
+  customerZip: document.querySelector("#customerZip"),
+  customerAddress: document.querySelector("#customerAddress"),
+  customerDocument: document.querySelector("#customerDocument"),
+  customerNotes: document.querySelector("#customerNotes"),
 };
 
 function normalizeText(value) {
@@ -466,10 +499,76 @@ function getCategory(product) {
   return pains.find((item) => item.id === product.pain) || pains[0];
 }
 
-function buildWhatsappUrl(productsToSend) {
-  const items = Array.isArray(productsToSend) ? productsToSend : [productsToSend];
-  const productLines = items.map((product) => `- ${product.name}`).join("\n");
-  const message = `Olá, quero informações sobre:\n${productLines}\n\nCatálogo Autêntica Professional`;
+function clampQuantity(value) {
+  const quantity = Number.parseInt(value, 10);
+  if (!Number.isFinite(quantity)) return 0;
+  return Math.min(99, Math.max(0, quantity));
+}
+
+function getQuantity(slug) {
+  return clampQuantity(state.quantities[slug]);
+}
+
+function getOrderEntries() {
+  return products
+    .map((product) => ({ product, quantity: getQuantity(product.slug) }))
+    .filter((entry) => entry.quantity > 0);
+}
+
+function getTotalUnits() {
+  return getOrderEntries().reduce((total, entry) => total + entry.quantity, 0);
+}
+
+function persistOrder() {
+  localStorage.setItem("autentica-order", JSON.stringify(state.quantities));
+  localStorage.removeItem("autentica-interest");
+}
+
+function getQualification() {
+  return {
+    name: elements.customerName.value.trim(),
+    profile: elements.customerProfile.value,
+    business: elements.businessName.value.trim(),
+    city: elements.customerCity.value.trim(),
+    zip: elements.customerZip.value.trim(),
+    address: elements.customerAddress.value.trim(),
+    document: elements.customerDocument.value.trim(),
+    notes: elements.customerNotes.value.trim(),
+  };
+}
+
+function buildWhatsappUrl(orderToSend, qualification = {}) {
+  const rawEntries = Array.isArray(orderToSend) ? orderToSend : [orderToSend];
+  const entries = rawEntries
+    .map((entry) => (entry.product ? entry : { product: entry, quantity: 1 }))
+    .filter((entry) => entry.product && clampQuantity(entry.quantity) > 0);
+
+  let message;
+  if (entries.length === 1) {
+    const [{ product, quantity }] = entries;
+    message = `Vi o ${product.name} no catálogo e quero comprar.\nQuantidade: ${quantity}`;
+  } else {
+    const productLines = entries.map(({ product, quantity }) => `- ${quantity}x ${product.name}`).join("\n");
+    const total = entries.reduce((sum, entry) => sum + entry.quantity, 0);
+    message = `Vi estes produtos no catálogo e quero comprar:\n${productLines}\n\nTotal: ${total} unidades`;
+  }
+
+  const qualificationLines = [
+    qualification.name && `Nome: ${qualification.name}`,
+    qualification.profile && `Perfil: ${qualification.profile}`,
+    qualification.business && `Salão/negócio: ${qualification.business}`,
+    qualification.city && `Cidade/UF: ${qualification.city}`,
+    qualification.zip && `CEP: ${qualification.zip}`,
+    qualification.address && `Endereço: ${qualification.address}`,
+    qualification.document && `CNPJ: ${qualification.document}`,
+    qualification.notes && `Observações: ${qualification.notes}`,
+  ].filter(Boolean);
+
+  if (qualificationLines.length) {
+    message += `\n\nDados para atendimento:\n${qualificationLines.join("\n")}`;
+  }
+
+  message += "\n\nCatálogo Autêntica Professional";
   const number = WHATSAPP_NUMBER.replace(/\D/g, "");
   const encodedMessage = encodeURIComponent(message);
   return number ? `https://wa.me/${number}?text=${encodedMessage}` : `https://wa.me/?text=${encodedMessage}`;
@@ -509,13 +608,17 @@ function renderProducts() {
   elements.currentContext.textContent = currentPain.context;
   elements.visibleCount.textContent = visibleProducts.length;
   elements.emptyState.hidden = visibleProducts.length > 0;
-  elements.requestVisible.href = buildWhatsappUrl(visibleProducts);
-  elements.requestVisible.setAttribute("aria-disabled", visibleProducts.length === 0 ? "true" : "false");
+  elements.requestVisible.textContent = getTotalUnits() ? `Revisar pedido (${getTotalUnits()})` : "Revisar pedido";
 
   elements.productGrid.innerHTML = visibleProducts
-    .map((product) => {
+    .map((product, index) => {
       const category = getCategory(product);
-      const isAdded = state.interest.has(product.slug);
+      const quantity = getQuantity(product.slug);
+      const isPriorityImage = index === 0;
+      const imageSource = isPriorityImage ? product.image : TRANSPARENT_PIXEL;
+      const deferredSource = isPriorityImage ? "" : ` data-src="${product.image}"`;
+      const loading = isPriorityImage ? "eager" : "lazy";
+      const fetchPriority = index === 0 ? "high" : "auto";
 
       return `
         <article class="product-card ${product.photo ? "has-photo" : ""}">
@@ -523,44 +626,86 @@ function renderProducts() {
             <div class="audience-tags">
               ${product.audiences.map((audience) => `<span>${audienceLabels[audience]}</span>`).join("")}
             </div>
-            <img src="${product.image}" alt="${product.name}" loading="lazy">
+            <img src="${imageSource}"${deferredSource} alt="${product.name}" loading="${loading}" decoding="async" fetchpriority="${fetchPriority}">
           </div>
           <div class="product-body">
             <span class="category-pill">${category.label}</span>
             <h3>${product.name}</h3>
             <p>${product.tagline}</p>
             <div class="result-line">${product.result}</div>
+            <div class="product-order-row">
+              <span>Quantidade</span>
+              <div class="quantity-stepper" aria-label="Quantidade de ${product.name}">
+                <button type="button" data-quantity-change="-1" data-slug="${product.slug}" aria-label="Diminuir ${product.name}">−</button>
+                <output data-quantity-output="${product.slug}" aria-live="polite">${quantity}</output>
+                <button type="button" data-quantity-change="1" data-slug="${product.slug}" aria-label="Aumentar ${product.name}">+</button>
+              </div>
+            </div>
             <div class="card-actions">
-              <button class="details-button" type="button" data-product="${product.slug}">Ver detalhes</button>
-              <button class="add-button" type="button" data-add="${product.slug}" aria-label="Adicionar ${product.name} à lista">
-                ${isAdded ? "✓" : "+"}
-              </button>
+              <a class="details-button" href="produtos/${product.slug}/" data-product="${product.slug}">Detalhes</a>
+              <button class="buy-button" type="button" data-buy="${product.slug}">Comprar</button>
             </div>
           </div>
         </article>
       `;
     })
     .join("");
+
+  observeProductImages();
+}
+
+function observeProductImages() {
+  const deferredImages = elements.productGrid.querySelectorAll("img[data-src]");
+
+  if (!("IntersectionObserver" in window)) {
+    deferredImages.forEach((image) => {
+      image.src = image.dataset.src;
+      image.removeAttribute("data-src");
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const image = entry.target;
+        image.src = image.dataset.src;
+        image.removeAttribute("data-src");
+        observer.unobserve(image);
+      });
+    },
+    { rootMargin: "240px 0px" }
+  );
+
+  deferredImages.forEach((image) => observer.observe(image));
 }
 
 function renderInterest() {
-  const selected = products.filter((product) => state.interest.has(product.slug));
-  elements.interestCount.textContent = selected.length;
-  elements.sendInterest.href = selected.length ? buildWhatsappUrl(selected) : buildWhatsappUrl(getVisibleProducts());
+  const selected = getOrderEntries();
+  const totalUnits = getTotalUnits();
+  elements.interestCount.textContent = totalUnits;
+  elements.sendInterest.disabled = selected.length === 0;
+  elements.requestVisible.textContent = totalUnits ? `Revisar pedido (${totalUnits})` : "Revisar pedido";
 
   if (!selected.length) {
-    elements.interestList.innerHTML = `<p class="empty-state">Nenhum produto selecionado ainda.</p>`;
+    elements.interestList.innerHTML = `<p class="empty-state">Seu pedido está vazio. Use os controles de quantidade nos produtos para começar.</p>`;
     return;
   }
 
   elements.interestList.innerHTML = selected
     .map(
-      (product) => `
+      ({ product, quantity }) => `
         <div class="interest-item">
-          <img src="${product.image}" alt="${product.name}">
+          <img src="${product.image}" alt="${product.name}" loading="lazy" decoding="async">
           <div>
             <strong>${product.name}</strong>
             <span>${product.category}</span>
+            <div class="quantity-stepper quantity-stepper-small" aria-label="Quantidade de ${product.name}">
+              <button type="button" data-quantity-change="-1" data-slug="${product.slug}" aria-label="Diminuir ${product.name}">−</button>
+              <output aria-live="polite">${quantity}</output>
+              <button type="button" data-quantity-change="1" data-slug="${product.slug}" aria-label="Aumentar ${product.name}">+</button>
+            </div>
           </div>
           <button class="remove-interest" type="button" data-remove="${product.slug}" aria-label="Remover ${product.name}">&times;</button>
         </div>
@@ -577,17 +722,30 @@ function setAudience(audience) {
   renderProducts();
 }
 
-function toggleInterest(slug) {
-  if (state.interest.has(slug)) {
-    state.interest.delete(slug);
-  } else {
-    state.interest.add(slug);
-  }
+function syncInitialFilters() {
+  if (!pains.some((pain) => pain.id === state.pain)) state.pain = "all";
+  if (!["all", "b2b", "b2c", "revenda"].includes(state.audience)) state.audience = "all";
+  elements.audienceFilters.querySelectorAll("button").forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.audience === state.audience);
+  });
+}
 
-  localStorage.setItem("autentica-interest", JSON.stringify([...state.interest]));
-
+function setQuantity(slug, value) {
+  const quantity = clampQuantity(value);
+  if (quantity > 0) state.quantities[slug] = quantity;
+  else delete state.quantities[slug];
+  persistOrder();
   renderProducts();
   renderInterest();
+  updateModalQuantity();
+}
+
+function changeQuantity(slug, delta) {
+  setQuantity(slug, getQuantity(slug) + delta);
+}
+
+function ensureProductInOrder(slug) {
+  if (!getQuantity(slug)) setQuantity(slug, 1);
 }
 
 function openProduct(slug) {
@@ -602,10 +760,11 @@ function openProduct(slug) {
   elements.modalActives.textContent = product.actives;
   elements.modalIndication.textContent = product.indication;
   elements.modalResult.textContent = product.result;
-  elements.modalWhatsapp.href = buildWhatsappUrl(product);
+  state.modalProductSlug = product.slug;
   elements.modalAdd.dataset.add = product.slug;
-  elements.modalAdd.textContent = state.interest.has(product.slug) ? "Remover da lista" : "Adicionar à lista";
+  elements.modalAdd.textContent = getQuantity(product.slug) ? "Atualizar pedido" : "Adicionar ao pedido";
   elements.modal.classList.toggle("has-photo", Boolean(product.photo));
+  updateModalQuantity();
 
   elements.backdrop.hidden = false;
   elements.modal.hidden = false;
@@ -615,6 +774,7 @@ function openProduct(slug) {
 function closeProduct() {
   elements.backdrop.hidden = true;
   elements.modal.hidden = true;
+  state.modalProductSlug = null;
 }
 
 function openInterestDrawer() {
@@ -624,6 +784,71 @@ function openInterestDrawer() {
 
 function closeInterestDrawer() {
   elements.interestDrawer.hidden = true;
+}
+
+function updateModalQuantity() {
+  if (!state.modalProductSlug) return;
+  elements.modalQuantity.textContent = getQuantity(state.modalProductSlug);
+  elements.modalAdd.textContent = getQuantity(state.modalProductSlug) ? "Atualizar pedido" : "Adicionar ao pedido";
+}
+
+function openCheckoutForProduct(slug) {
+  ensureProductInOrder(slug);
+  closeProduct();
+  openInterestDrawer();
+  window.setTimeout(() => elements.customerName.focus(), 0);
+}
+
+function updateBusinessRequirement() {
+  const needsBusiness = elements.customerProfile.value && elements.customerProfile.value !== "Cliente final";
+  elements.businessName.required = Boolean(needsBusiness);
+  elements.businessNameLabel.classList.toggle("is-required", Boolean(needsBusiness));
+}
+
+function persistQualification() {
+  localStorage.setItem("autentica-qualification", JSON.stringify(getQualification()));
+}
+
+function hydrateQualification() {
+  const saved = readStoredJson("autentica-qualification", {});
+  const fields = {
+    customerName: saved.name,
+    customerProfile: saved.profile,
+    businessName: saved.business,
+    customerCity: saved.city,
+    customerZip: saved.zip,
+    customerAddress: saved.address,
+    customerDocument: saved.document,
+    customerNotes: saved.notes,
+  };
+
+  Object.entries(fields).forEach(([id, value]) => {
+    if (value && elements[id]) elements[id].value = value;
+  });
+  updateBusinessRequirement();
+}
+
+function sendOrderToWhatsapp(event) {
+  event.preventDefault();
+  const entries = getOrderEntries();
+  if (!entries.length || !elements.qualificationForm.reportValidity()) return;
+
+  persistQualification();
+  const whatsappUrl = buildWhatsappUrl(entries, getQualification());
+  elements.sendInterest.dataset.whatsappUrl = whatsappUrl;
+  const link = document.createElement("a");
+  link.href = whatsappUrl;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  document.body.append(link);
+  link.click();
+  link.remove();
+}
+
+function openRequestedProduct() {
+  if (!REQUESTED_PRODUCT_SLUG || !products.some((product) => product.slug === REQUESTED_PRODUCT_SLUG)) return;
+  ensureProductInOrder(REQUESTED_PRODUCT_SLUG);
+  openInterestDrawer();
 }
 
 function bindEvents() {
@@ -655,16 +880,24 @@ function bindEvents() {
 
   elements.productGrid.addEventListener("click", (event) => {
     const detailButton = event.target.closest("[data-product]");
-    const addButton = event.target.closest("[data-add]");
+    const buyButton = event.target.closest("[data-buy]");
+    const quantityButton = event.target.closest("[data-quantity-change]");
 
-    if (detailButton) openProduct(detailButton.dataset.product);
-    if (addButton) toggleInterest(addButton.dataset.add);
+    if (detailButton) {
+      event.preventDefault();
+      openProduct(detailButton.dataset.product);
+    }
+    if (buyButton) openCheckoutForProduct(buyButton.dataset.buy);
+    if (quantityButton) changeQuantity(quantityButton.dataset.slug, Number(quantityButton.dataset.quantityChange));
   });
 
   elements.modalAdd.addEventListener("click", () => {
-    toggleInterest(elements.modalAdd.dataset.add);
-    openProduct(elements.modalAdd.dataset.add);
+    ensureProductInOrder(elements.modalAdd.dataset.add);
+    updateModalQuantity();
   });
+  elements.modalDecrease.addEventListener("click", () => changeQuantity(state.modalProductSlug, -1));
+  elements.modalIncrease.addEventListener("click", () => changeQuantity(state.modalProductSlug, 1));
+  elements.modalWhatsapp.addEventListener("click", () => openCheckoutForProduct(state.modalProductSlug));
 
   elements.closeModal.addEventListener("click", closeProduct);
   elements.backdrop.addEventListener("click", () => {
@@ -674,19 +907,32 @@ function bindEvents() {
 
   elements.openInterest.addEventListener("click", openInterestDrawer);
   elements.closeInterest.addEventListener("click", closeInterestDrawer);
+  elements.requestVisible.addEventListener("click", openInterestDrawer);
 
   elements.interestList.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-remove]");
-    if (!button) return;
-    toggleInterest(button.dataset.remove);
+    const removeButton = event.target.closest("[data-remove]");
+    const quantityButton = event.target.closest("[data-quantity-change]");
+    if (removeButton) setQuantity(removeButton.dataset.remove, 0);
+    if (quantityButton) changeQuantity(quantityButton.dataset.slug, Number(quantityButton.dataset.quantityChange));
   });
 
   elements.clearInterest.addEventListener("click", () => {
-    state.interest.clear();
-    localStorage.removeItem("autentica-interest");
+    state.quantities = {};
+    persistOrder();
     renderProducts();
     renderInterest();
   });
+
+  elements.qualificationForm.addEventListener("input", persistQualification);
+  elements.customerProfile.addEventListener("change", () => {
+    updateBusinessRequirement();
+    persistQualification();
+  });
+  elements.customerZip.addEventListener("input", (event) => {
+    const digits = event.target.value.replace(/\D/g, "").slice(0, 8);
+    event.target.value = digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
+  });
+  elements.qualificationForm.addEventListener("submit", sendOrderToWhatsapp);
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
@@ -695,7 +941,10 @@ function bindEvents() {
   });
 }
 
+syncInitialFilters();
+hydrateQualification();
 renderPainFilters();
 renderProducts();
 renderInterest();
 bindEvents();
+openRequestedProduct();
