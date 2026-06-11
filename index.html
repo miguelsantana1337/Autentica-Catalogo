@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Autêntica Professional | Catálogo Interativo</title>
+    <meta
+      name="description"
+      content="Catálogo interativo Autêntica Professional para salões, profissionais e revenda."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Autêntica Professional">
+        <span class="brand-symbol" aria-hidden="true"></span>
+        <span class="brand-wordmark" aria-hidden="true"></span>
+      </a>
+
+      <nav class="top-actions" aria-label="Ações principais">
+        <a class="ghost-link" href="assets/catalogo/autentica-catalogo-original.pdf" target="_blank" rel="noreferrer">
+          PDF
+        </a>
+        <a class="ghost-link" href="https://www.instagram.com/autenticaprofessional/" target="_blank" rel="noreferrer">
+          Instagram
+        </a>
+        <button class="interest-button" id="openInterest" type="button">
+          Lista <span id="interestCount">0</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="catalog-intro" aria-labelledby="catalogTitle">
+        <div class="intro-copy">
+          <span class="eyebrow">Catálogo profissional</span>
+          <h1 id="catalogTitle">Escolha pela dor do cabelo ou pela etapa do serviço.</h1>
+          <p>
+            Produtos organizados para transformar atendimento em indicação rápida:
+            redução de volume, recuperação extrema, loiros, terapia capilar e finalização premium.
+          </p>
+        </div>
+
+        <form class="finder" id="searchForm" role="search">
+          <label for="searchInput">Buscar produto, ativo ou resultado</label>
+          <div class="search-row">
+            <input id="searchInput" type="search" placeholder="Ex: frizz, loiro, argan, queda">
+            <button id="clearSearch" type="button" aria-label="Limpar busca">Limpar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="controls" aria-label="Filtros do catálogo">
+        <div>
+          <span class="control-label">Dor ou etapa</span>
+          <div class="chip-row" id="painFilters"></div>
+        </div>
+
+        <div>
+          <span class="control-label">Perfil</span>
+          <div class="segmented" id="audienceFilters" role="tablist" aria-label="Filtro por perfil">
+            <button class="is-active" type="button" data-audience="all">Todos</button>
+            <button type="button" data-audience="b2b">Salão</button>
+            <button type="button" data-audience="b2c">Cliente</button>
+            <button type="button" data-audience="revenda">Revenda</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <aside class="summary-panel" aria-label="Resumo comercial">
+          <div class="panel-section">
+            <span class="control-label">Leitura rápida</span>
+            <p>
+              O portfólio combina químicas de alta rentabilidade para lavatório com finalizadores
+              de revenda rápida para manter a cliente comprando em casa.
+            </p>
+          </div>
+          <div class="metric-grid">
+            <div>
+              <strong id="visibleCount">0</strong>
+              <span>produtos</span>
+            </div>
+            <div>
+              <strong>6</strong>
+              <span>rotas</span>
+            </div>
+          </div>
+          <div class="panel-section">
+            <span class="control-label">Catálogo original</span>
+            <div class="catalog-preview">
+              <a href="assets/catalogo/page-1.jpg" target="_blank" rel="noreferrer">
+                <img src="assets/catalogo/page-1.jpg" alt="Página 1 do catálogo Autêntica">
+              </a>
+              <a href="assets/catalogo/page-2.jpg" target="_blank" rel="noreferrer">
+                <img src="assets/catalogo/page-2.jpg" alt="Página 2 do catálogo Autêntica">
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <section class="product-area" aria-live="polite">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow" id="currentContext">Todos os produtos</span>
+              <h2 id="sectionTitle">Catálogo Autêntica Professional</h2>
+            </div>
+            <a class="whatsapp-all" id="requestVisible" target="_blank" rel="noreferrer">Solicitar filtrados</a>
+          </div>
+
+          <div class="product-grid" id="productGrid"></div>
+          <p class="empty-state" id="emptyState" hidden>Nenhum produto encontrado para este filtro.</p>
+        </section>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+    <section class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+      <button class="icon-button close-modal" id="closeModal" type="button" aria-label="Fechar">&times;</button>
+      <div class="modal-media">
+        <img id="modalImage" src="" alt="">
+      </div>
+      <div class="modal-content">
+        <span class="eyebrow" id="modalCategory"></span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <dl class="detail-list">
+          <div>
+            <dt>Ativos</dt>
+            <dd id="modalActives"></dd>
+          </div>
+          <div>
+            <dt>Indicação</dt>
+            <dd id="modalIndication"></dd>
+          </div>
+          <div>
+            <dt>Resultado</dt>
+            <dd id="modalResult"></dd>
+          </div>
+        </dl>
+        <div class="modal-actions">
+          <a class="primary-link" id="modalWhatsapp" target="_blank" rel="noreferrer">Solicitar no WhatsApp</a>
+          <button class="secondary-button" id="modalAdd" type="button">Adicionar à lista</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="interest-drawer" id="interestDrawer" aria-label="Lista de interesse" hidden>
+      <div class="drawer-head">
+        <div>
+          <span class="eyebrow">Lista de interesse</span>
+        <h2>Produtos selecionados</h2>
+        </div>
+        <button class="icon-button" id="closeInterest" type="button" aria-label="Fechar lista">&times;</button>
+      </div>
+      <div class="interest-list" id="interestList"></div>
+      <div class="drawer-actions">
+        <button class="secondary-button" id="clearInterest" type="button">Limpar lista</button>
+        <a class="primary-link" id="sendInterest" target="_blank" rel="noreferrer">Enviar pedido</a>
+      </div>
+    </aside>
+
+    <script src="app.js"></script>
+  </body>
+</html>
