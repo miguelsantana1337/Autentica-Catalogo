@@ -10,6 +10,7 @@ Executado em 11 de junho de 2026.
 - Previsualizacoes do PDF reduzidas de JPG para WebP.
 - O PDF de 6,3 MB permanece disponivel somente por clique e nao entra no carregamento inicial.
 - Teste local simulado em Fast 3G, CPU 4x e viewport 390 x 844: 1,76 segundo ate `load`, 288 KB transferidos e 6 recursos iniciais.
+- Teste na URL de producao com o mesmo perfil: 1,11 segundo ate `load`, 92 KB transferidos e 4 recursos iniciais.
 
 ## 2. Friccao no CTA
 
