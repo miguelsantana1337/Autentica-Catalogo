@@ -130,6 +130,7 @@ function renderProductPage(product) {
       <section class="product-hero section-shell">
         <div class="product-photo ${product.photo ? "is-photo" : "is-cutout"}">
           <img src="../../${escapeHtml(product.image)}" alt="${escapeHtml(product.name)} Autêntica Professional" width="900" height="900">
+${product.packshotLabel ? `          <div class="product-packshot-label"><strong>${escapeHtml(product.packshotLabel.title)}</strong><span>${escapeHtml(product.packshotLabel.subtitle)}</span></div>` : ""}
         </div>
         <div class="product-intro">
           <p class="eyebrow">${escapeHtml(painLabels[product.pain])}</p>

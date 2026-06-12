@@ -24,7 +24,7 @@ const products = [
     tagline: "Escova orgânica para liso total com saúde e força.",
     actives: "Blend orgânico.",
     indication: "Redução de volume, alinhamento e controle de frizz em serviços de salão.",
-    result: "Alisamento total, fios mais fortes e acabamento saudavel.",
+    result: "Alisamento total, fios mais fortes e acabamento saudável.",
     description:
       "Indicada para profissionais que precisam entregar redução de volume com apelo orgânico e resultado visual de alto impacto.",
   },
@@ -50,6 +50,7 @@ const products = [
     pain: "volume",
     audiences: ["b2b"],
     image: "assets/products/reforce-xtreme-btx.webp",
+    packshotLabel: { title: "Reforce Xtreme", subtitle: "Reposição de massa" },
     tagline: "Máscara termoativada para reposição de massa.",
     actives: "Repositor de massa com ação termoativada.",
     indication: "Todos os tipos de cabelo que precisam de selagem e disciplina.",
@@ -63,8 +64,8 @@ const products = [
     category: "Transformação",
     pain: "volume",
     audiences: ["b2b"],
-    image: "assets/drive-products/extrato-floresta-luxeplastica.webp",
-    photo: true,
+    image: "assets/products/extrato-floresta-luxeplastica.webp",
+    packshotLabel: { title: "Extrato Floresta", subtitle: "Luxeplástica" },
     tagline: "Luxeplástica com ativos da Amazônia.",
     actives: "Ativos da Floresta Amazônica e efeito orgânico.",
     indication: "Cauterização com redução de frizz e alinhamento das cutículas.",
@@ -79,6 +80,7 @@ const products = [
     pain: "volume",
     audiences: ["b2b"],
     image: "assets/products/btx-blond.webp",
+    packshotLabel: { title: "BTX Blond", subtitle: "Restaurador capilar" },
     tagline: "Restaurador capilar com pigmento matizante.",
     actives: "Pigmentos matizantes para proteção da cor.",
     indication: "Cabelos cacheados, crespos ou indisciplinados com necessidade de reduzir volume.",
@@ -129,7 +131,7 @@ const products = [
     indication: "Pós-mechas, pós-progressiva e fios ressecados.",
     result: "Regenera o manto hidrolipídico e sela áreas porosas.",
     description:
-      "Linha de nutricao para recuperar toque, flexibilidade e brilho em cabelos que passaram por processos quimicos.",
+      "Linha de nutrição para recuperar toque, flexibilidade e brilho em cabelos que passaram por processos químicos.",
   },
   {
     slug: "morango-champagner",
@@ -247,7 +249,7 @@ const products = [
     indication: "Fios fracos após dengue, zika, chikungunya, covid-19 ou queda intensa.",
     result: "Estimula crescimento e devolve força e brilho.",
     description:
-      "Linha voltada para terapia capilar e retencao de clientes que buscam fortalecer fios fragilizados.",
+      "Linha voltada para terapia capilar e retenção de clientes que buscam fortalecer fios fragilizados.",
   },
   {
     slug: "therapy-detox",
@@ -283,7 +285,7 @@ const products = [
     slug: "super-cachos",
     name: "Super Cachos",
     category: "Cachos",
-    pain: "scalp",
+    pain: "finish",
     audiences: ["b2b", "b2c", "revenda"],
     image: "assets/drive-products/super-cachos.webp",
     photo: true,
@@ -292,7 +294,7 @@ const products = [
     indication: "Todas as curvaturas que precisam de definição e movimento natural.",
     result: "Reativa memória dos cachos, reduz volume e elimina frizz.",
     description:
-      "Linha para valorizar curvaturas com brilho, balanco e forma definida sem perder naturalidade.",
+      "Linha para valorizar curvaturas com brilho, balanço e forma definida sem perder naturalidade.",
   },
   {
     slug: "inspira-parfum",
@@ -321,7 +323,7 @@ const products = [
     indication: "Fios alinhados e saudáveis que pedem perfume e brilho.",
     result: "Perfume intenso, proteção e controle de frizz.",
     description:
-      "Produto de ticket rapido para a cliente levar a experiencia do salao para a rotina.",
+      "Produto de ticket rápido para a cliente levar a experiência do salão para a rotina.",
   },
   {
     slug: "parfum-ouro-argan",
@@ -335,7 +337,7 @@ const products = [
     indication: "Fios que precisam de perfume, resistência e vitalidade sem peso.",
     result: "Reconstrução leve, maciez intensa e controle de frizz.",
     description:
-      "Finalizador com proposta de luxo e tratamento, ideal para complementar servicos de reconstrucao.",
+      "Finalizador com proposta de luxo e tratamento, ideal para complementar serviços de reconstrução.",
   },
   {
     slug: "oleo-reparador-ouro-argan",
@@ -421,6 +423,7 @@ function readStoredJson(key, fallback) {
 
 const savedQuantities = readStoredJson("autentica-order", {});
 const legacyInterest = readStoredJson("autentica-interest", []);
+localStorage.removeItem("autentica-qualification");
 
 if (!Object.keys(savedQuantities).length && Array.isArray(legacyInterest)) {
   legacyInterest.forEach((slug) => {
@@ -469,6 +472,7 @@ const elements = {
   modalDecrease: document.querySelector("#modalDecrease"),
   modalIncrease: document.querySelector("#modalIncrease"),
   modalQuantity: document.querySelector("#modalQuantity"),
+  modalPackshotLabel: document.querySelector("#modalPackshotLabel"),
   openInterest: document.querySelector("#openInterest"),
   closeInterest: document.querySelector("#closeInterest"),
   interestDrawer: document.querySelector("#interestDrawer"),
@@ -485,6 +489,7 @@ const elements = {
   customerZip: document.querySelector("#customerZip"),
   customerAddress: document.querySelector("#customerAddress"),
   customerDocument: document.querySelector("#customerDocument"),
+  customerDocumentLabel: document.querySelector("#customerDocumentLabel"),
   customerNotes: document.querySelector("#customerNotes"),
 };
 
@@ -592,7 +597,7 @@ function renderPainFilters() {
   elements.painFilters.innerHTML = pains
     .map(
       (pain) => `
-        <button class="${state.pain === pain.id ? "is-active" : ""}" type="button" data-pain="${pain.id}">
+        <button class="${state.pain === pain.id ? "is-active" : ""}" type="button" data-pain="${pain.id}" aria-pressed="${state.pain === pain.id}">
           ${pain.label}
         </button>
       `
@@ -608,7 +613,7 @@ function renderProducts() {
   elements.currentContext.textContent = currentPain.context;
   elements.visibleCount.textContent = visibleProducts.length;
   elements.emptyState.hidden = visibleProducts.length > 0;
-  elements.requestVisible.textContent = getTotalUnits() ? `Revisar pedido (${getTotalUnits()})` : "Revisar pedido";
+  elements.requestVisible.textContent = getTotalUnits() ? `Ver pedido (${getTotalUnits()})` : "Ver pedido";
 
   elements.productGrid.innerHTML = visibleProducts
     .map((product, index) => {
@@ -619,6 +624,9 @@ function renderProducts() {
       const deferredSource = isPriorityImage ? "" : ` data-src="${product.image}"`;
       const loading = isPriorityImage ? "eager" : "lazy";
       const fetchPriority = index === 0 ? "high" : "auto";
+      const packshotLabel = product.packshotLabel
+        ? `<div class="packshot-label"><strong>${product.packshotLabel.title}</strong><span>${product.packshotLabel.subtitle}</span></div>`
+        : "";
 
       return `
         <article class="product-card ${product.photo ? "has-photo" : ""}">
@@ -627,6 +635,7 @@ function renderProducts() {
               ${product.audiences.map((audience) => `<span>${audienceLabels[audience]}</span>`).join("")}
             </div>
             <img src="${imageSource}"${deferredSource} alt="${product.name}" loading="${loading}" decoding="async" fetchpriority="${fetchPriority}">
+            ${packshotLabel}
           </div>
           <div class="product-body">
             <span class="category-pill">${category.label}</span>
@@ -642,8 +651,8 @@ function renderProducts() {
               </div>
             </div>
             <div class="card-actions">
-              <a class="details-button" href="produtos/${product.slug}/" data-product="${product.slug}">Detalhes</a>
-              <button class="buy-button" type="button" data-buy="${product.slug}">Comprar</button>
+              <button class="details-button" type="button" data-product="${product.slug}">Ver detalhes</button>
+              <button class="buy-button" type="button" data-buy="${product.slug}" aria-label="Comprar ${product.name}">Comprar</button>
             </div>
           </div>
         </article>
@@ -686,7 +695,7 @@ function renderInterest() {
   const totalUnits = getTotalUnits();
   elements.interestCount.textContent = totalUnits;
   elements.sendInterest.disabled = selected.length === 0;
-  elements.requestVisible.textContent = totalUnits ? `Revisar pedido (${totalUnits})` : "Revisar pedido";
+  elements.requestVisible.textContent = totalUnits ? `Ver pedido (${totalUnits})` : "Ver pedido";
 
   if (!selected.length) {
     elements.interestList.innerHTML = `<p class="empty-state">Seu pedido está vazio. Use os controles de quantidade nos produtos para começar.</p>`;
@@ -717,7 +726,9 @@ function renderInterest() {
 function setAudience(audience) {
   state.audience = audience;
   elements.audienceFilters.querySelectorAll("button").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.audience === audience);
+    const isActive = button.dataset.audience === audience;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
   });
   renderProducts();
 }
@@ -726,7 +737,9 @@ function syncInitialFilters() {
   if (!pains.some((pain) => pain.id === state.pain)) state.pain = "all";
   if (!["all", "b2b", "b2c", "revenda"].includes(state.audience)) state.audience = "all";
   elements.audienceFilters.querySelectorAll("button").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.audience === state.audience);
+    const isActive = button.dataset.audience === state.audience;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
   });
 }
 
@@ -760,30 +773,42 @@ function openProduct(slug) {
   elements.modalActives.textContent = product.actives;
   elements.modalIndication.textContent = product.indication;
   elements.modalResult.textContent = product.result;
+  elements.modalPackshotLabel.hidden = !product.packshotLabel;
+  elements.modalPackshotLabel.innerHTML = product.packshotLabel
+    ? `<strong>${product.packshotLabel.title}</strong><span>${product.packshotLabel.subtitle}</span>`
+    : "";
   state.modalProductSlug = product.slug;
   elements.modalAdd.dataset.add = product.slug;
   elements.modalAdd.textContent = getQuantity(product.slug) ? "Atualizar pedido" : "Adicionar ao pedido";
   elements.modal.classList.toggle("has-photo", Boolean(product.photo));
   updateModalQuantity();
 
-  elements.backdrop.hidden = false;
   elements.modal.hidden = false;
+  syncOverlayState();
   elements.closeModal.focus();
 }
 
 function closeProduct() {
-  elements.backdrop.hidden = true;
   elements.modal.hidden = true;
   state.modalProductSlug = null;
+  syncOverlayState();
 }
 
 function openInterestDrawer() {
   renderInterest();
   elements.interestDrawer.hidden = false;
+  syncOverlayState();
 }
 
 function closeInterestDrawer() {
   elements.interestDrawer.hidden = true;
+  syncOverlayState();
+}
+
+function syncOverlayState() {
+  const hasOpenOverlay = !elements.modal.hidden || !elements.interestDrawer.hidden;
+  elements.backdrop.hidden = !hasOpenOverlay;
+  document.body.classList.toggle("is-locked", hasOpenOverlay);
 }
 
 function updateModalQuantity() {
@@ -802,30 +827,9 @@ function openCheckoutForProduct(slug) {
 function updateBusinessRequirement() {
   const needsBusiness = elements.customerProfile.value && elements.customerProfile.value !== "Cliente final";
   elements.businessName.required = Boolean(needsBusiness);
+  elements.businessNameLabel.hidden = !needsBusiness;
+  elements.customerDocumentLabel.hidden = !needsBusiness;
   elements.businessNameLabel.classList.toggle("is-required", Boolean(needsBusiness));
-}
-
-function persistQualification() {
-  localStorage.setItem("autentica-qualification", JSON.stringify(getQualification()));
-}
-
-function hydrateQualification() {
-  const saved = readStoredJson("autentica-qualification", {});
-  const fields = {
-    customerName: saved.name,
-    customerProfile: saved.profile,
-    businessName: saved.business,
-    customerCity: saved.city,
-    customerZip: saved.zip,
-    customerAddress: saved.address,
-    customerDocument: saved.document,
-    customerNotes: saved.notes,
-  };
-
-  Object.entries(fields).forEach(([id, value]) => {
-    if (value && elements[id]) elements[id].value = value;
-  });
-  updateBusinessRequirement();
 }
 
 function sendOrderToWhatsapp(event) {
@@ -833,9 +837,7 @@ function sendOrderToWhatsapp(event) {
   const entries = getOrderEntries();
   if (!entries.length || !elements.qualificationForm.reportValidity()) return;
 
-  persistQualification();
   const whatsappUrl = buildWhatsappUrl(entries, getQualification());
-  elements.sendInterest.dataset.whatsappUrl = whatsappUrl;
   const link = document.createElement("a");
   link.href = whatsappUrl;
   link.target = "_blank";
@@ -923,11 +925,7 @@ function bindEvents() {
     renderInterest();
   });
 
-  elements.qualificationForm.addEventListener("input", persistQualification);
-  elements.customerProfile.addEventListener("change", () => {
-    updateBusinessRequirement();
-    persistQualification();
-  });
+  elements.customerProfile.addEventListener("change", updateBusinessRequirement);
   elements.customerZip.addEventListener("input", (event) => {
     const digits = event.target.value.replace(/\D/g, "").slice(0, 8);
     event.target.value = digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
@@ -942,7 +940,7 @@ function bindEvents() {
 }
 
 syncInitialFilters();
-hydrateQualification();
+updateBusinessRequirement();
 renderPainFilters();
 renderProducts();
 renderInterest();

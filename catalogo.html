@@ -39,10 +39,9 @@
       <section class="catalog-intro" aria-labelledby="catalogTitle">
         <div class="intro-copy">
           <span class="eyebrow">Catálogo profissional</span>
-          <h1 id="catalogTitle">Escolha pela dor do cabelo ou pela etapa do serviço.</h1>
+          <h1 id="catalogTitle">Encontre o produto certo para cada resultado.</h1>
           <p>
-            Produtos organizados para transformar atendimento em indicação rápida:
-            redução de volume, recuperação extrema, loiros, terapia capilar e finalização premium.
+            Busque pelo nome ou filtre por necessidade, perfil de compra e etapa do serviço.
           </p>
         </div>
 
@@ -73,44 +72,14 @@
       </section>
 
       <section class="layout">
-        <aside class="summary-panel" aria-label="Resumo comercial">
-          <div class="panel-section">
-            <span class="control-label">Leitura rápida</span>
-            <p>
-              O portfólio combina químicas de alta rentabilidade para lavatório com finalizadores
-              de revenda rápida para manter a cliente comprando em casa.
-            </p>
-          </div>
-          <div class="metric-grid">
-            <div>
-              <strong id="visibleCount">0</strong>
-              <span>produtos</span>
-            </div>
-            <div>
-              <strong>6</strong>
-              <span>rotas</span>
-            </div>
-          </div>
-          <div class="panel-section">
-            <span class="control-label">Catálogo original</span>
-            <div class="catalog-preview">
-              <a href="assets/catalogo/page-1.jpg" target="_blank" rel="noreferrer">
-                <img src="assets/catalogo/page-1.webp" alt="Página 1 do catálogo Autêntica" loading="lazy" decoding="async">
-              </a>
-              <a href="assets/catalogo/page-2.jpg" target="_blank" rel="noreferrer">
-                <img src="assets/catalogo/page-2.webp" alt="Página 2 do catálogo Autêntica" loading="lazy" decoding="async">
-              </a>
-            </div>
-          </div>
-        </aside>
-
         <section class="product-area" aria-live="polite">
           <div class="section-head">
             <div>
               <span class="eyebrow" id="currentContext">Todos os produtos</span>
               <h2 id="sectionTitle">Catálogo Autêntica Professional</h2>
+              <p class="results-count"><strong id="visibleCount">0</strong> produtos encontrados</p>
             </div>
-            <button class="whatsapp-all" id="requestVisible" type="button">Revisar pedido</button>
+            <button class="whatsapp-all" id="requestVisible" type="button">Ver pedido</button>
           </div>
 
           <div class="product-grid" id="productGrid"></div>
@@ -124,6 +93,7 @@
       <button class="icon-button close-modal" id="closeModal" type="button" aria-label="Fechar">&times;</button>
       <div class="modal-media">
         <img id="modalImage" src="" alt="">
+        <div class="packshot-label modal-packshot-label" id="modalPackshotLabel" hidden></div>
       </div>
       <div class="modal-content">
         <span class="eyebrow" id="modalCategory"></span>
@@ -164,7 +134,7 @@
           <span class="eyebrow">Pedido pelo WhatsApp</span>
           <h2>Revise e envie</h2>
         </div>
-        <button class="icon-button" id="closeInterest" type="button" aria-label="Fechar lista">&times;</button>
+        <button class="icon-button" id="closeInterest" type="button" aria-label="Fechar pedido">&times;</button>
       </div>
       <div class="drawer-scroll">
         <div class="interest-list" id="interestList"></div>
@@ -190,7 +160,7 @@
             </select>
           </label>
 
-          <label id="businessNameLabel">
+          <label id="businessNameLabel" hidden>
             Nome do salão ou negócio
             <input id="businessName" name="businessName" type="text" autocomplete="organization">
           </label>
@@ -211,7 +181,7 @@
             <input id="customerAddress" name="customerAddress" type="text" autocomplete="street-address" placeholder="Rua, número, bairro e complemento" required>
           </label>
 
-          <label>
+          <label id="customerDocumentLabel" hidden>
             CNPJ <span>(opcional)</span>
             <input id="customerDocument" name="customerDocument" type="text" inputmode="numeric">
           </label>

@@ -12,7 +12,7 @@
     "tagline": "Escova orgânica para liso total com saúde e força.",
     "actives": "Blend orgânico.",
     "indication": "Redução de volume, alinhamento e controle de frizz em serviços de salão.",
-    "result": "Alisamento total, fios mais fortes e acabamento saudavel.",
+    "result": "Alisamento total, fios mais fortes e acabamento saudável.",
     "description": "Indicada para profissionais que precisam entregar redução de volume com apelo orgânico e resultado visual de alto impacto.",
     "url": "https://autentica-professional-catalogo.netlify.app/produtos/terra-acai/"
   },
@@ -42,6 +42,10 @@
       "b2b"
     ],
     "image": "https://autentica-professional-catalogo.netlify.app/assets/products/reforce-xtreme-btx.webp",
+    "packshotLabel": {
+      "title": "Reforce Xtreme",
+      "subtitle": "Reposição de massa"
+    },
     "tagline": "Máscara termoativada para reposição de massa.",
     "actives": "Repositor de massa com ação termoativada.",
     "indication": "Todos os tipos de cabelo que precisam de selagem e disciplina.",
@@ -57,8 +61,11 @@
     "audiences": [
       "b2b"
     ],
-    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/extrato-floresta-luxeplastica.webp",
-    "photo": true,
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/extrato-floresta-luxeplastica.webp",
+    "packshotLabel": {
+      "title": "Extrato Floresta",
+      "subtitle": "Luxeplástica"
+    },
     "tagline": "Luxeplástica com ativos da Amazônia.",
     "actives": "Ativos da Floresta Amazônica e efeito orgânico.",
     "indication": "Cauterização com redução de frizz e alinhamento das cutículas.",
@@ -75,6 +82,10 @@
       "b2b"
     ],
     "image": "https://autentica-professional-catalogo.netlify.app/assets/products/btx-blond.webp",
+    "packshotLabel": {
+      "title": "BTX Blond",
+      "subtitle": "Restaurador capilar"
+    },
     "tagline": "Restaurador capilar com pigmento matizante.",
     "actives": "Pigmentos matizantes para proteção da cor.",
     "indication": "Cabelos cacheados, crespos ou indisciplinados com necessidade de reduzir volume.",
@@ -136,7 +147,7 @@
     "actives": "Lipídeos e sistema nutritivo.",
     "indication": "Pós-mechas, pós-progressiva e fios ressecados.",
     "result": "Regenera o manto hidrolipídico e sela áreas porosas.",
-    "description": "Linha de nutricao para recuperar toque, flexibilidade e brilho em cabelos que passaram por processos quimicos.",
+    "description": "Linha de nutrição para recuperar toque, flexibilidade e brilho em cabelos que passaram por processos químicos.",
     "url": "https://autentica-professional-catalogo.netlify.app/produtos/super-nutri/"
   },
   {
@@ -282,7 +293,7 @@
     "actives": "Blend de vitaminas.",
     "indication": "Fios fracos após dengue, zika, chikungunya, covid-19 ou queda intensa.",
     "result": "Estimula crescimento e devolve força e brilho.",
-    "description": "Linha voltada para terapia capilar e retencao de clientes que buscam fortalecer fios fragilizados.",
+    "description": "Linha voltada para terapia capilar e retenção de clientes que buscam fortalecer fios fragilizados.",
     "url": "https://autentica-professional-catalogo.netlify.app/produtos/vita-hair/"
   },
   {
@@ -327,7 +338,7 @@
     "slug": "super-cachos",
     "name": "Super Cachos",
     "category": "Cachos",
-    "pain": "scalp",
+    "pain": "finish",
     "audiences": [
       "b2b",
       "b2c",
@@ -339,7 +350,7 @@
     "actives": "Sistema de tratamento para cabelos ondulados, cacheados e crespos.",
     "indication": "Todas as curvaturas que precisam de definição e movimento natural.",
     "result": "Reativa memória dos cachos, reduz volume e elimina frizz.",
-    "description": "Linha para valorizar curvaturas com brilho, balanco e forma definida sem perder naturalidade.",
+    "description": "Linha para valorizar curvaturas com brilho, balanço e forma definida sem perder naturalidade.",
     "url": "https://autentica-professional-catalogo.netlify.app/produtos/super-cachos/"
   },
   {
@@ -374,7 +385,7 @@
     "actives": "Fragrância capilar, proteção solar e anti-frizz.",
     "indication": "Fios alinhados e saudáveis que pedem perfume e brilho.",
     "result": "Perfume intenso, proteção e controle de frizz.",
-    "description": "Produto de ticket rapido para a cliente levar a experiencia do salao para a rotina.",
+    "description": "Produto de ticket rápido para a cliente levar a experiência do salão para a rotina.",
     "url": "https://autentica-professional-catalogo.netlify.app/produtos/use-me-parfum/"
   },
   {
@@ -391,7 +402,7 @@
     "actives": "Óleos vegetais.",
     "indication": "Fios que precisam de perfume, resistência e vitalidade sem peso.",
     "result": "Reconstrução leve, maciez intensa e controle de frizz.",
-    "description": "Finalizador com proposta de luxo e tratamento, ideal para complementar servicos de reconstrucao.",
+    "description": "Finalizador com proposta de luxo e tratamento, ideal para complementar serviços de reconstrução.",
     "url": "https://autentica-professional-catalogo.netlify.app/produtos/parfum-ouro-argan/"
   },
   {

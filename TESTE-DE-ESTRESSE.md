@@ -21,7 +21,7 @@ Executado em 11 de junho de 2026.
 
 ## 3. Navegacao
 
-- Filtros por dor permanecem fixos durante a rolagem.
+- Abas de filtro por dor aparecem imediatamente antes da grade, sem cobrir os produtos durante a rolagem.
 - Rotas principais: Reducao de volume, Cronograma capilar, Loiros/descoloracao, Terapia capilar, Finalizadores e Uso profissional.
 - Busca e filtro por perfil continuam disponiveis.
 
