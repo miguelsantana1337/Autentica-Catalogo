@@ -27,3 +27,8 @@
   from = "/links"
   to = "/links.html"
   status = 301
+
+[[redirects]]
+  from = "/produtos/morango-champagner/"
+  to = "/catalogo.html?linha=recovery"
+  status = 301

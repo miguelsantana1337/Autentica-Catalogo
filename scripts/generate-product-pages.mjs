@@ -200,9 +200,10 @@ const staticUrls = [
   "guias/como-escolher-tratamento-capilar/",
 ];
 const urls = [...staticUrls, ...products.map((product) => `produtos/${product.slug}/`)];
+const lastModified = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((url) => `  <url><loc>${siteUrl}/${url}</loc><lastmod>2026-06-11</lastmod></url>`).join("\n")}
+${urls.map((url) => `  <url><loc>${siteUrl}/${url}</loc><lastmod>${lastModified}</lastmod></url>`).join("\n")}
 </urlset>\n`;
 fs.writeFileSync(path.join(root, "sitemap.xml"), sitemap);
 
