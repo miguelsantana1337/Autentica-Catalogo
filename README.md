@@ -7,7 +7,7 @@ Site institucional estático da Autêntica Professional, preparado para posicion
 - `/`: site institucional.
 - `/catalogo.html`: catálogo interativo com busca, filtros, pedido e WhatsApp.
 - `/links.html`: árvore de links para a bio do Instagram.
-- `/produtos/{slug}/`: 33 páginas indexáveis de produto.
+- `/produtos/{slug}/`: 34 páginas indexáveis de produto.
 - `/guias/`: conteúdos editoriais sobre cuidado capilar.
 - `/obrigado/`: confirmação do formulário comercial.
 
@@ -54,7 +54,7 @@ As páginas usam os dados de `app.js`. Depois de alterar o portfólio, execute:
 SITE_URL=https://seu-dominio.com node scripts/generate-product-pages.mjs
 ```
 
-O script recria as 33 páginas, `produtos.json` e `sitemap.xml`. Neste ambiente, pode ser necessário usar o caminho completo do Node fornecido pelo Codex.
+O script recria as 34 páginas, `produtos.json` e `sitemap.xml`. Neste ambiente, pode ser necessário usar o caminho completo do Node fornecido pelo Codex.
 
 ## Domínio
 

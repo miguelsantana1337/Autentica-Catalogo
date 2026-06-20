@@ -6,7 +6,7 @@
     <title>Catálogo de Produtos | Autêntica Professional</title>
     <meta
       name="description"
-      content="Conheça as linhas Autêntica Professional para transformação, recuperação, loiros, terapia capilar, cachos, finalização e uso profissional."
+      content="Monte seu pedido Autêntica Professional por necessidade, linha, tipo de produto e perfil de compra. Envie tudo direto pelo WhatsApp."
     >
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://autentica-professional-catalogo.netlify.app/catalogo.html">
@@ -39,9 +39,9 @@
       <section class="catalog-intro" aria-labelledby="catalogTitle">
         <div class="intro-copy">
           <span class="eyebrow">Catálogo profissional</span>
-          <h1 id="catalogTitle">Encontre o produto certo para cada resultado.</h1>
+          <h1 id="catalogTitle">Monte seu pedido Autêntica em poucos minutos.</h1>
           <p>
-            Busque pelo nome ou filtre por necessidade, perfil de compra e etapa do serviço.
+            Filtre por necessidade, linha ou perfil de compra, escolha as quantidades e envie o orçamento direto para atendimento.
           </p>
         </div>
 
@@ -54,10 +54,28 @@
         </form>
       </section>
 
+      <section class="quick-filters" aria-label="Atalhos comerciais">
+        <button type="button" data-quick-filter="professional">Profissional</button>
+        <button type="button" data-quick-filter="resale">Revenda</button>
+        <button type="button" data-quick-filter="consumer">Cliente final</button>
+        <button type="button" data-quick-filter="launches">Lançamentos</button>
+        <button type="button" data-quick-filter="featured">Mais vendidos</button>
+      </section>
+
       <section class="controls" aria-label="Filtros do catálogo">
         <div>
           <span class="control-label">Dor ou etapa</span>
           <div class="chip-row" id="painFilters"></div>
+        </div>
+
+        <div>
+          <span class="control-label">Linha</span>
+          <div class="chip-row" id="lineFilters"></div>
+        </div>
+
+        <div>
+          <span class="control-label">Tipo</span>
+          <div class="chip-row" id="typeFilters"></div>
         </div>
 
         <div>
@@ -77,12 +95,17 @@
             <div>
               <span class="eyebrow" id="currentContext">Todos os produtos</span>
               <h2 id="sectionTitle">Catálogo Autêntica Professional</h2>
-              <p class="results-count"><strong id="visibleCount">0</strong> produtos encontrados</p>
+              <p class="results-count"><strong id="visibleCount">Carregando</strong> produtos encontrados</p>
             </div>
             <button class="whatsapp-all" id="requestVisible" type="button">Ver pedido</button>
           </div>
 
-          <div class="product-grid" id="productGrid"></div>
+          <div class="product-grid is-loading" id="productGrid" aria-busy="true">
+            <article class="product-card skeleton-card" aria-hidden="true"></article>
+            <article class="product-card skeleton-card" aria-hidden="true"></article>
+            <article class="product-card skeleton-card" aria-hidden="true"></article>
+            <article class="product-card skeleton-card" aria-hidden="true"></article>
+          </div>
           <p class="empty-state" id="emptyState" hidden>Nenhum produto encontrado para este filtro.</p>
         </section>
       </section>
@@ -92,7 +115,7 @@
     <section class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
       <button class="icon-button close-modal" id="closeModal" type="button" aria-label="Fechar">&times;</button>
       <div class="modal-media">
-        <img id="modalImage" src="" alt="">
+        <img id="modalImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="">
         <div class="packshot-label modal-packshot-label" id="modalPackshotLabel" hidden></div>
       </div>
       <div class="modal-content">
@@ -112,7 +135,12 @@
             <dt>Resultado</dt>
             <dd id="modalResult"></dd>
           </div>
+          <div>
+            <dt>Modo de uso</dt>
+            <dd id="modalUsage"></dd>
+          </div>
         </dl>
+        <div class="modal-complements" id="modalComplements"></div>
         <div class="modal-order-row">
           <span>Quantidade</span>
           <div class="quantity-stepper" aria-label="Quantidade do produto">
@@ -137,10 +165,21 @@
         <button class="icon-button" id="closeInterest" type="button" aria-label="Fechar pedido">&times;</button>
       </div>
       <div class="drawer-scroll">
-        <div class="interest-list" id="interestList"></div>
+        <ol class="checkout-steps" aria-label="Etapas do pedido">
+          <li><span>1</span> Produtos</li>
+          <li><span>2</span> Dados</li>
+          <li><span>3</span> Revisão</li>
+          <li><span>4</span> WhatsApp</li>
+        </ol>
+        <section class="drawer-section" aria-labelledby="productsStepTitle">
+          <span class="step-label">Etapa 1</span>
+          <h3 id="productsStepTitle">Produtos selecionados</h3>
+          <div class="interest-list" id="interestList"></div>
+        </section>
         <form class="qualification-form" id="qualificationForm">
           <div class="form-heading">
-            <span class="eyebrow">Dados para atendimento</span>
+            <span class="step-label">Etapa 2</span>
+            <h3>Dados comerciais</h3>
             <p>Preencha para receber disponibilidade, prazo e condições corretas para o seu perfil.</p>
           </div>
 
@@ -193,7 +232,7 @@
 
           <div class="drawer-actions">
             <button class="secondary-button" id="clearInterest" type="button">Limpar pedido</button>
-            <button class="primary-link" id="sendInterest" type="submit">Enviar no WhatsApp</button>
+            <button class="primary-link" id="sendInterest" type="submit">Enviar orçamento no WhatsApp</button>
           </div>
         </form>
       </div>

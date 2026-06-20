@@ -5,7 +5,7 @@
 ## Conteúdo principal
 
 - [Site institucional](https://autentica-professional-catalogo.netlify.app/): posicionamento, públicos, soluções e contato comercial.
-- [Catálogo interativo](https://autentica-professional-catalogo.netlify.app/catalogo.html): 27 produtos filtrados por necessidade e perfil de uso.
+- [Catálogo interativo](https://autentica-professional-catalogo.netlify.app/catalogo.html): 34 produtos filtrados por necessidade e perfil de uso.
 - [Dados estruturados do portfólio](https://autentica-professional-catalogo.netlify.app/produtos.json): lista legível por máquina com produtos, indicações, ativos, resultados e URLs canônicas.
 - [Cronograma capilar](https://autentica-professional-catalogo.netlify.app/guias/cronograma-capilar/): hidratação, nutrição e reconstrução.
 - [Cuidados pós-química](https://autentica-professional-catalogo.netlify.app/guias/cabelos-pos-quimica/): sinais de dano e recuperação da fibra.

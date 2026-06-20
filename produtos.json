@@ -300,6 +300,25 @@
     "url": "https://autentica-professional-catalogo.netlify.app/produtos/sos/"
   },
   {
+    "slug": "sos-premium-elixir-repair",
+    "name": "S.O.S Premium Elixir Repair",
+    "category": "Reparação premium",
+    "pain": "recovery",
+    "audiences": [
+      "b2b",
+      "b2c",
+      "revenda"
+    ],
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/lancamentos/sos-premium-elixir-repair-foto-produtos.webp",
+    "photo": true,
+    "tagline": "Tecnologia avançada em reparação capilar.",
+    "actives": "Tecnologia de reparação premium com foco em anti-quebra, selagem visual de cutículas e cuidado das pontas.",
+    "indication": "Fios fragilizados, com quebra, pontas duplas, opacidade e sinais de dano.",
+    "result": "Ajuda a melhorar resistência cosmética, selagem visual, maciez e brilho.",
+    "description": "Linha premium de reparação capilar criada para transformar o diagnóstico de fios fragilizados em uma rotina de tratamento e manutenção.",
+    "url": "https://autentica-professional-catalogo.netlify.app/produtos/sos-premium-elixir-repair/"
+  },
+  {
     "slug": "desfibrilador",
     "name": "Desfibrilador",
     "category": "Cauterização",
@@ -455,7 +474,7 @@
       "b2c",
       "revenda"
     ],
-    "image": "https://autentica-professional-catalogo.netlify.app/assets/drive-products/super-cachos.webp",
+    "image": "https://autentica-professional-catalogo.netlify.app/assets/products/super-cachos-externo.webp",
     "photo": true,
     "tagline": "Definição, memória do cacho e controle de frizz.",
     "actives": "Sistema de tratamento para cabelos ondulados, cacheados e crespos.",

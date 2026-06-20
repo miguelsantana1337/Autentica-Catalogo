@@ -1,5 +1,7 @@
 {
   "sourceFolder": "https://drive.google.com/drive/folders/1LSRuF9DlZaewiFwZ5Nvpt7N1PkocGZAM?usp=sharing",
+  "updatedSourceFolder": "https://drive.google.com/drive/folders/1D6qHTpFgj7Q_rLB32uOy7d3bJmkorMO8?usp=sharing",
+  "updatedAt": "2026-06-13",
   "processedFormat": "WebP quality 86, maximum dimension 1600px",
   "products": {
     "terra-acai": "3090dd51-2f1d-4e5c-bb34-883473a0df3b.jpg",
@@ -20,5 +22,27 @@
     "inspira-parfum": "8f1020e5-7dba-44c8-839a-ca90ce3c52e9.jpg",
     "oleo-reparador-ouro-argan": "978c565d-64ec-4d2e-b67c-0303eb9ca905.jpg",
     "perfect-argan-macadamia": "6aa33966-8a01-4028-baa1-e406a2b038b6.jpg"
+  },
+  "videoFrameUpdates": {
+    "ouro-argan": {
+      "source": "IMG_1217.MOV",
+      "driveId": "1REil6Nz8AJ_rmdUjbXZP23-HxXGMGL3A",
+      "frameTime": "2.5s"
+    },
+    "ta-liso": {
+      "source": "IMG_1218.MOV",
+      "driveId": "137TIwPFkj-S-hmJoZkMQq7muQVEY-PJr",
+      "frameTime": "7.5s"
+    },
+    "terra-acai": {
+      "source": "IMG_1220.MOV",
+      "driveId": "1U42I6yiSUGABfpxjndAL5Ol4VwKcU4--",
+      "frameTime": "6.5s"
+    },
+    "oleo-reparador-ouro-argan": {
+      "source": "IMG_1217.MOV",
+      "driveId": "1REil6Nz8AJ_rmdUjbXZP23-HxXGMGL3A",
+      "frameTime": "4.5s"
+    }
   }
 }

@@ -254,6 +254,21 @@ const products = [
       "Tratamento para recuperar o aspecto de fios fragilizados, com foco em resistencia e toque.",
   },
   {
+    slug: "sos-premium-elixir-repair",
+    name: "S.O.S Premium Elixir Repair",
+    category: "Reparação premium",
+    pain: "recovery",
+    audiences: ["b2b", "b2c", "revenda"],
+    image: "assets/lancamentos/sos-premium-elixir-repair-foto-produtos.webp",
+    photo: true,
+    tagline: "Tecnologia avançada em reparação capilar.",
+    actives: "Tecnologia de reparação premium com foco em anti-quebra, selagem visual de cutículas e cuidado das pontas.",
+    indication: "Fios fragilizados, com quebra, pontas duplas, opacidade e sinais de dano.",
+    result: "Ajuda a melhorar resistência cosmética, selagem visual, maciez e brilho.",
+    description:
+      "Linha premium de reparação capilar criada para transformar o diagnóstico de fios fragilizados em uma rotina de tratamento e manutenção.",
+  },
+  {
     slug: "desfibrilador",
     name: "Desfibrilador",
     category: "Cauterização",
@@ -377,7 +392,7 @@ const products = [
     category: "Cachos",
     pain: "finish",
     audiences: ["b2b", "b2c", "revenda"],
-    image: "assets/drive-products/super-cachos.webp",
+    image: "assets/products/super-cachos-externo.webp",
     photo: true,
     tagline: "Definição, memória do cacho e controle de frizz.",
     actives: "Sistema de tratamento para cabelos ondulados, cacheados e crespos.",
@@ -504,6 +519,74 @@ const products = [
   },
 ];
 
+const featuredProductSlugs = new Set([
+  "sos-premium-elixir-repair",
+  "terra-acai",
+  "ouro-argan",
+  "morango-champagne-mascara-500g",
+  "super-cachos",
+  "inspira-parfum",
+]);
+
+const lineFilters = [
+  { id: "all", label: "Todas" },
+  { id: "sos-premium", label: "S.O.S Premium" },
+  { id: "sos", label: "S.O.S" },
+  { id: "morango-champagne", label: "Morango & Champagne" },
+  { id: "ouro-argan", label: "Ouro Argan" },
+  { id: "super-cachos", label: "Super Cachos" },
+  { id: "ta-liso", label: "Tá Liso" },
+  { id: "transformacao", label: "Transformação" },
+  { id: "loiros", label: "Loiros" },
+  { id: "finalizadores", label: "Finalizadores" },
+  { id: "lavatory", label: "Lavatório" },
+  { id: "outras", label: "Outras" },
+];
+
+const typeFilters = [
+  { id: "all", label: "Todos" },
+  { id: "shampoo", label: "Shampoo" },
+  { id: "condicionador", label: "Condicionador" },
+  { id: "mascara", label: "Máscara" },
+  { id: "oleo", label: "Óleo" },
+  { id: "finalizador", label: "Finalizador" },
+  { id: "transformacao", label: "Progressiva / BTX" },
+  { id: "tratamento", label: "Tratamento" },
+  { id: "profissional", label: "Uso profissional" },
+];
+
+function getProductLine(product) {
+  const slug = product.slug;
+  const text = normalizeText(`${product.name} ${product.category}`);
+  if (slug === "sos-premium-elixir-repair") return "sos-premium";
+  if (slug === "sos" || text.includes("s.o.s")) return "sos";
+  if (slug.includes("morango-champagne")) return "morango-champagne";
+  if (slug.includes("ouro-argan") || slug === "parfum-ouro-argan") return "ouro-argan";
+  if (slug.includes("super-cachos")) return "super-cachos";
+  if (slug.includes("ta-liso")) return "ta-liso";
+  if (["terra-acai", "reforce-xtreme-btx", "extrato-floresta-luxeplastica", "btx-blond"].includes(slug)) return "transformacao";
+  if (["po-descolorante", "black-platinum", "silver-blond"].includes(slug)) return "loiros";
+  if (product.pain === "finish") return "finalizadores";
+  if (product.pain === "lavatory") return "lavatory";
+  return "outras";
+}
+
+function getProductType(product) {
+  const text = normalizeText(`${product.name} ${product.category} ${product.tagline}`);
+  if (text.includes("shampoo")) return "shampoo";
+  if (text.includes("condicionador")) return "condicionador";
+  if (text.includes("mascara") || text.includes("btx") || text.includes("botox")) return "mascara";
+  if (text.includes("oleo") || text.includes("oil") || text.includes("elixir")) return "oleo";
+  if (text.includes("finalizador") || text.includes("parfum") || text.includes("bb cream")) return "finalizador";
+  if (product.pain === "volume") return "transformacao";
+  if (product.pain === "lavatory" || product.audiences.length === 1 && product.audiences.includes("b2b")) return "profissional";
+  return "tratamento";
+}
+
+function getFilterOptions(filters, getter) {
+  return filters.filter((filter) => filter.id === "all" || products.some((product) => getter(product) === filter.id));
+}
+
 function readStoredJson(key, fallback) {
   try {
     return JSON.parse(localStorage.getItem(key) || "") || fallback;
@@ -524,7 +607,10 @@ if (!Object.keys(savedQuantities).length && Array.isArray(legacyInterest)) {
 
 const state = {
   pain: new URLSearchParams(window.location.search).get("linha") || "all",
+  line: new URLSearchParams(window.location.search).get("familia") || "all",
+  type: new URLSearchParams(window.location.search).get("tipo") || "all",
   audience: new URLSearchParams(window.location.search).get("perfil") || "all",
+  featured: new URLSearchParams(window.location.search).get("destaques") === "1",
   search: "",
   quantities: savedQuantities,
   modalProductSlug: null,
@@ -537,7 +623,10 @@ const audienceLabels = {
 };
 
 const elements = {
+  quickFilters: document.querySelector(".quick-filters"),
   painFilters: document.querySelector("#painFilters"),
+  lineFilters: document.querySelector("#lineFilters"),
+  typeFilters: document.querySelector("#typeFilters"),
   audienceFilters: document.querySelector("#audienceFilters"),
   searchInput: document.querySelector("#searchInput"),
   searchForm: document.querySelector("#searchForm"),
@@ -558,6 +647,8 @@ const elements = {
   modalActives: document.querySelector("#modalActives"),
   modalIndication: document.querySelector("#modalIndication"),
   modalResult: document.querySelector("#modalResult"),
+  modalUsage: document.querySelector("#modalUsage"),
+  modalComplements: document.querySelector("#modalComplements"),
   modalWhatsapp: document.querySelector("#modalWhatsapp"),
   modalAdd: document.querySelector("#modalAdd"),
   modalDecrease: document.querySelector("#modalDecrease"),
@@ -593,6 +684,40 @@ function normalizeText(value) {
 
 function getCategory(product) {
   return pains.find((item) => item.id === product.pain) || pains[0];
+}
+
+function getLineLabel(product) {
+  return (lineFilters.find((filter) => filter.id === getProductLine(product)) || lineFilters[0]).label;
+}
+
+function getTypeLabel(product) {
+  return (typeFilters.find((filter) => filter.id === getProductType(product)) || typeFilters[0]).label;
+}
+
+function getQuickTags(product) {
+  const tags = [getTypeLabel(product), getLineLabel(product)];
+  if (product.audiences.includes("b2b")) tags.push("Profissional");
+  if (product.audiences.includes("revenda")) tags.push("Revenda");
+  if (featuredProductSlugs.has(product.slug)) tags.push("Destaque");
+  return [...new Set(tags)].slice(0, 4);
+}
+
+function getUsageGuidance(product) {
+  if (product.pain === "volume" || product.audiences.length === 1 && product.audiences.includes("b2b")) {
+    return "Uso profissional: indicar conforme diagnóstico do fio, histórico químico e orientação técnica do rótulo.";
+  }
+  if (getProductType(product) === "finalizador" || getProductType(product) === "oleo") {
+    return "Aplicar na finalização ou manutenção, ajustando a quantidade ao comprimento e à necessidade do cabelo.";
+  }
+  return "Usar dentro da rotina de tratamento ou manutenção indicada pelo profissional, respeitando a etapa do protocolo.";
+}
+
+function getComplementaryProducts(product) {
+  const sameLine = products.filter((candidate) => candidate.slug !== product.slug && getProductLine(candidate) === getProductLine(product));
+  const samePain = products.filter((candidate) => candidate.slug !== product.slug && candidate.pain === product.pain);
+  return [...sameLine, ...samePain]
+    .filter((candidate, index, list) => list.findIndex((item) => item.slug === candidate.slug) === index)
+    .slice(0, 3);
 }
 
 function clampQuantity(value) {
@@ -639,19 +764,9 @@ function buildWhatsappUrl(orderToSend, qualification = {}) {
     .map((entry) => (entry.product ? entry : { product: entry, quantity: 1 }))
     .filter((entry) => entry.product && clampQuantity(entry.quantity) > 0);
 
-  let message;
-  if (entries.length === 1) {
-    const [{ product, quantity }] = entries;
-    message = `Vi o ${product.name} no catálogo e quero comprar.\nQuantidade: ${quantity}`;
-  } else {
-    const productLines = entries.map(({ product, quantity }) => `- ${quantity}x ${product.name}`).join("\n");
-    const total = entries.reduce((sum, entry) => sum + entry.quantity, 0);
-    message = `Vi estes produtos no catálogo e quero comprar:\n${productLines}\n\nTotal: ${total} unidades`;
-  }
-
   const qualificationLines = [
-    qualification.name && `Nome: ${qualification.name}`,
     qualification.profile && `Perfil: ${qualification.profile}`,
+    qualification.name && `Nome: ${qualification.name}`,
     qualification.business && `Salão/negócio: ${qualification.business}`,
     qualification.city && `Cidade/UF: ${qualification.city}`,
     qualification.zip && `CEP: ${qualification.zip}`,
@@ -660,10 +775,17 @@ function buildWhatsappUrl(orderToSend, qualification = {}) {
     qualification.notes && `Observações: ${qualification.notes}`,
   ].filter(Boolean);
 
+  const productLines = entries
+    .map(({ product, quantity }) => `- ${product.name} — ${quantity} ${quantity === 1 ? "unidade" : "unidades"}`)
+    .join("\n");
+  const total = entries.reduce((sum, entry) => sum + entry.quantity, 0);
+  let message = "Olá, quero fazer um orçamento Autêntica Professional.";
+
   if (qualificationLines.length) {
     message += `\n\nDados para atendimento:\n${qualificationLines.join("\n")}`;
   }
 
+  message += `\n\nProdutos selecionados:\n${productLines}\n\nTotal: ${total} ${total === 1 ? "unidade" : "unidades"}`;
   message += "\n\nCatálogo Autêntica Professional";
   const number = WHATSAPP_NUMBER.replace(/\D/g, "");
   const encodedMessage = encodeURIComponent(message);
@@ -672,12 +794,15 @@ function buildWhatsappUrl(orderToSend, qualification = {}) {
 
 function matchesProduct(product) {
   const matchesPain = state.pain === "all" || product.pain === state.pain;
+  const matchesLine = state.line === "all" || getProductLine(product) === state.line;
+  const matchesType = state.type === "all" || getProductType(product) === state.type;
   const matchesAudience = state.audience === "all" || product.audiences.includes(state.audience);
+  const matchesFeatured = !state.featured || featuredProductSlugs.has(product.slug);
   const haystack = normalizeText(
-    `${product.name} ${product.category} ${product.tagline} ${product.actives} ${product.indication} ${product.result}`
+    `${product.name} ${product.category} ${product.tagline} ${product.actives} ${product.indication} ${product.result} ${getLineLabel(product)} ${getTypeLabel(product)}`
   );
   const matchesSearch = !state.search || haystack.includes(normalizeText(state.search));
-  return matchesPain && matchesAudience && matchesSearch;
+  return matchesPain && matchesLine && matchesType && matchesAudience && matchesFeatured && matchesSearch;
 }
 
 function getVisibleProducts() {
@@ -696,6 +821,36 @@ function renderPainFilters() {
     .join("");
 }
 
+function renderLineFilters() {
+  elements.lineFilters.innerHTML = getFilterOptions(lineFilters, getProductLine)
+    .map(
+      (filter) => `
+        <button class="${state.line === filter.id ? "is-active" : ""}" type="button" data-line="${filter.id}" aria-pressed="${state.line === filter.id}">
+          ${filter.label}
+        </button>
+      `
+    )
+    .join("");
+}
+
+function renderTypeFilters() {
+  elements.typeFilters.innerHTML = getFilterOptions(typeFilters, getProductType)
+    .map(
+      (filter) => `
+        <button class="${state.type === filter.id ? "is-active" : ""}" type="button" data-type="${filter.id}" aria-pressed="${state.type === filter.id}">
+          ${filter.label}
+        </button>
+      `
+    )
+    .join("");
+}
+
+function renderQuickFilters(activeFilter = "") {
+  elements.quickFilters.querySelectorAll("[data-quick-filter]").forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.quickFilter === activeFilter);
+  });
+}
+
 function renderProducts() {
   const visibleProducts = getVisibleProducts();
   const currentPain = pains.find((pain) => pain.id === state.pain) || pains[0];
@@ -705,6 +860,8 @@ function renderProducts() {
   elements.visibleCount.textContent = visibleProducts.length;
   elements.emptyState.hidden = visibleProducts.length > 0;
   elements.requestVisible.textContent = getTotalUnits() ? `Ver pedido (${getTotalUnits()})` : "Ver pedido";
+  elements.productGrid.classList.remove("is-loading");
+  elements.productGrid.setAttribute("aria-busy", "false");
 
   elements.productGrid.innerHTML = visibleProducts
     .map((product, index) => {
@@ -715,6 +872,7 @@ function renderProducts() {
       const deferredSource = isPriorityImage ? "" : ` data-src="${product.image}"`;
       const loading = isPriorityImage ? "eager" : "lazy";
       const fetchPriority = index === 0 ? "high" : "auto";
+      const tags = getQuickTags(product).map((tag) => `<span>${tag}</span>`).join("");
       const packshotLabel = product.packshotLabel
         ? `<div class="packshot-label"><strong>${product.packshotLabel.title}</strong><span>${product.packshotLabel.subtitle}</span></div>`
         : "";
@@ -732,7 +890,9 @@ function renderProducts() {
             <span class="category-pill">${category.label}</span>
             <h3>${product.name}</h3>
             <p>${product.tagline}</p>
-            <div class="result-line">${product.result}</div>
+            <div class="product-meta"><span>Função principal</span><strong>${product.category}</strong></div>
+            <div class="indication-line"><span>Indicado para</span>${product.indication}</div>
+            <div class="quick-tag-row">${tags}</div>
             <div class="product-order-row">
               <span>Quantidade</span>
               <div class="quantity-stepper" aria-label="Quantidade de ${product.name}">
@@ -743,7 +903,7 @@ function renderProducts() {
             </div>
             <div class="card-actions">
               <button class="details-button" type="button" data-product="${product.slug}">Ver detalhes</button>
-              <button class="buy-button" type="button" data-buy="${product.slug}" aria-label="Comprar ${product.name}">Comprar</button>
+              <button class="buy-button" type="button" data-buy="${product.slug}" aria-label="Adicionar ${product.name} ao pedido">Adicionar</button>
             </div>
           </div>
         </article>
@@ -824,8 +984,38 @@ function setAudience(audience) {
   renderProducts();
 }
 
+function resetCommercialShortcut() {
+  state.featured = false;
+  renderQuickFilters();
+}
+
+function applyQuickFilter(filter) {
+  state.pain = "all";
+  state.line = "all";
+  state.type = "all";
+  state.audience = "all";
+  state.featured = false;
+  state.search = "";
+  elements.searchInput.value = "";
+
+  if (filter === "professional") state.audience = "b2b";
+  if (filter === "resale") state.audience = "revenda";
+  if (filter === "consumer") state.audience = "b2c";
+  if (filter === "launches") state.line = "sos-premium";
+  if (filter === "featured") state.featured = true;
+
+  renderPainFilters();
+  renderLineFilters();
+  renderTypeFilters();
+  syncInitialFilters();
+  renderQuickFilters(filter);
+  renderProducts();
+}
+
 function syncInitialFilters() {
   if (!pains.some((pain) => pain.id === state.pain)) state.pain = "all";
+  if (!getFilterOptions(lineFilters, getProductLine).some((filter) => filter.id === state.line)) state.line = "all";
+  if (!getFilterOptions(typeFilters, getProductType).some((filter) => filter.id === state.type)) state.type = "all";
   if (!["all", "b2b", "b2c", "revenda"].includes(state.audience)) state.audience = "all";
   elements.audienceFilters.querySelectorAll("button").forEach((button) => {
     const isActive = button.dataset.audience === state.audience;
@@ -864,6 +1054,15 @@ function openProduct(slug) {
   elements.modalActives.textContent = product.actives;
   elements.modalIndication.textContent = product.indication;
   elements.modalResult.textContent = product.result;
+  elements.modalUsage.textContent = getUsageGuidance(product);
+  elements.modalComplements.innerHTML = `
+    <span>Produtos complementares</span>
+    <div class="complement-list">
+      ${getComplementaryProducts(product)
+        .map((candidate) => `<button type="button" data-related-product="${candidate.slug}">${candidate.name}</button>`)
+        .join("")}
+    </div>
+  `;
   elements.modalPackshotLabel.hidden = !product.packshotLabel;
   elements.modalPackshotLabel.innerHTML = product.packshotLabel
     ? `<strong>${product.packshotLabel.title}</strong><span>${product.packshotLabel.subtitle}</span>`
@@ -946,28 +1145,56 @@ function openRequestedProduct() {
 
 function bindEvents() {
   elements.searchForm.addEventListener("submit", (event) => event.preventDefault());
+  elements.quickFilters.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-quick-filter]");
+    if (!button) return;
+    applyQuickFilter(button.dataset.quickFilter);
+  });
+
   elements.painFilters.addEventListener("click", (event) => {
     const button = event.target.closest("[data-pain]");
     if (!button) return;
     state.pain = button.dataset.pain;
+    resetCommercialShortcut();
     renderPainFilters();
+    renderProducts();
+  });
+
+  elements.lineFilters.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-line]");
+    if (!button) return;
+    state.line = button.dataset.line;
+    resetCommercialShortcut();
+    renderLineFilters();
+    renderProducts();
+  });
+
+  elements.typeFilters.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-type]");
+    if (!button) return;
+    state.type = button.dataset.type;
+    resetCommercialShortcut();
+    renderTypeFilters();
     renderProducts();
   });
 
   elements.audienceFilters.addEventListener("click", (event) => {
     const button = event.target.closest("[data-audience]");
     if (!button) return;
+    resetCommercialShortcut();
     setAudience(button.dataset.audience);
   });
 
   elements.searchInput.addEventListener("input", (event) => {
     state.search = event.target.value.trim();
+    resetCommercialShortcut();
     renderProducts();
   });
 
   elements.clearSearch.addEventListener("click", () => {
     state.search = "";
     elements.searchInput.value = "";
+    resetCommercialShortcut();
     renderProducts();
   });
 
@@ -991,6 +1218,11 @@ function bindEvents() {
   elements.modalDecrease.addEventListener("click", () => changeQuantity(state.modalProductSlug, -1));
   elements.modalIncrease.addEventListener("click", () => changeQuantity(state.modalProductSlug, 1));
   elements.modalWhatsapp.addEventListener("click", () => openCheckoutForProduct(state.modalProductSlug));
+  elements.modalComplements.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-related-product]");
+    if (!button) return;
+    openProduct(button.dataset.relatedProduct);
+  });
 
   elements.closeModal.addEventListener("click", closeProduct);
   elements.backdrop.addEventListener("click", () => {
@@ -1030,10 +1262,27 @@ function bindEvents() {
   });
 }
 
-syncInitialFilters();
-updateBusinessRequirement();
-renderPainFilters();
-renderProducts();
-renderInterest();
-bindEvents();
-openRequestedProduct();
+function initializeCatalog() {
+  try {
+    syncInitialFilters();
+    updateBusinessRequirement();
+    renderPainFilters();
+    renderLineFilters();
+    renderTypeFilters();
+    renderQuickFilters(state.featured ? "featured" : "");
+    renderProducts();
+    renderInterest();
+    bindEvents();
+    openRequestedProduct();
+  } catch (error) {
+    console.error("Falha ao inicializar catálogo Autêntica", error);
+    elements.productGrid.classList.remove("is-loading");
+    elements.productGrid.setAttribute("aria-busy", "false");
+    elements.productGrid.innerHTML = "";
+    elements.visibleCount.textContent = "0";
+    elements.emptyState.hidden = false;
+    elements.emptyState.textContent = "Não foi possível carregar o catálogo neste momento. Atualize a página ou chame a Autêntica no WhatsApp.";
+  }
+}
+
+initializeCatalog();
