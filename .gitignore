@@ -1,2 +1,28 @@
-.netlify/
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next
+/.next/
+/out/
+
+# testing
+/coverage/
+/playwright-report/
+/test-results/
+
+# local environment
+.env
+.env.local
+.env.*.local
+
+# misc
 .DS_Store
+*.pem
+*.jibackup
+*.tsbuildinfo
+next-env.d.ts.tmp
+.vercel
+.env*
+!.env.example

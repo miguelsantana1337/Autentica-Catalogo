@@ -1,0 +1,181 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AlertTriangle, ArrowLeft, CheckCircle2, LockKeyhole } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCallback, useMemo, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { useCart } from "@/components/providers/cart-provider";
+import { useStore } from "@/components/providers/store-provider";
+import { TurnstileWidget } from "@/components/security/turnstile-widget";
+import { formatMoney, whatsappUrl } from "@/lib/format";
+import { checkoutSchema, type CheckoutFormInput, type CheckoutInput } from "@/lib/validation";
+import { renderWhatsappOrderMessage } from "@/lib/whatsapp-order";
+import { CHECKOUT_TERMS_VERSION, checkoutTerms } from "@/lib/checkout-terms";
+import { withStorefrontPath } from "@/lib/storefront-path";
+import type { Order } from "@/types/store";
+
+const states = ["MG", "SP", "RJ", "ES", "BA", "PR", "SC", "RS", "GO", "DF", "Outro"];
+
+type PersistedOrder = {
+  id: string;
+  customer_id?: string;
+  code: string;
+  created_at: string;
+  subtotal: number;
+  discount: number;
+  shipping: number;
+  total: number;
+  cashback_total?: number;
+  status: Order["status"];
+  order_source?: Order["orderSource"];
+  reservation_expires_at?: string;
+};
+
+export function CheckoutScreen() {
+  const { data, addOrder, demoMode } = useStore();
+  const { lines, coupon, calculate, clearCart } = useCart();
+  const router = useRouter();
+  const [submitError, setSubmitError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
+  const [startedAt] = useState(() => Date.now());
+  const handleTurnstileToken = useCallback((token: string) => setTurnstileToken(token), []);
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm<CheckoutFormInput, unknown, CheckoutInput>({
+    resolver: zodResolver(checkoutSchema),
+    defaultValues: { payment: "Pix", complement: "", profile: "Profissional ou salão", business: "", document: "", notes: "", consent: false, termsAccepted: false, botField: "", startedAt },
+  });
+  const payment = useWatch({ control, name: "payment" });
+  const calculation = calculate(payment);
+  const storeHref = (href: string) => withStorefrontPath(data.tenant.storefrontPath, href);
+  const cartProducts = useMemo(
+    () => lines.map((line) => ({ line, product: data.products.find((item) => item.id === line.productId) })).filter((entry) => entry.product),
+    [data.products, lines],
+  );
+
+  async function submit(values: CheckoutInput) {
+    setSubmitError("");
+    const termsAcceptedAt = new Date().toISOString();
+    const customer = {
+      name: values.name,
+      phone: values.phone,
+      email: values.email,
+      zip: values.zip,
+      city: values.city,
+      state: values.state,
+      address: values.address,
+      number: values.number,
+      complement: values.complement,
+      profile: values.profile,
+      business: values.business,
+      document: values.document,
+      notes: values.notes,
+      termsAcceptedAt,
+      termsVersion: CHECKOUT_TERMS_VERSION,
+    };
+    const items = cartProducts.map(({ line, product }) => ({
+      productId: product!.id,
+      name: product!.name,
+      quantity: line.quantity,
+      unitPrice: product!.price,
+      unitCost: 0,
+      unitCashback: product!.cashback,
+    }));
+    const nextNumber = data.orders.reduce((max, order) => Math.max(max, Number(order.code.replace(/\D/g, "")) || 1000), 1000) + 1;
+    let persisted: PersistedOrder | null = null;
+
+    if (!demoMode) {
+      const requestId = idempotencyKey || crypto.randomUUID();
+      if (!idempotencyKey) setIdempotencyKey(requestId);
+      const response = await fetch("/api/storefront/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tenantId: data.tenant.id,
+          customer,
+          items: items.map((item) => ({ productId: item.productId, quantity: item.quantity })),
+          payment: values.payment,
+          termsAccepted: values.termsAccepted,
+          couponCode: coupon?.code ?? "",
+          idempotencyKey: requestId,
+          botField: values.botField,
+          startedAt: values.startedAt,
+          turnstileToken,
+        }),
+      });
+      const payload = await response.json().catch(() => null) as { order?: PersistedOrder; error?: string } | null;
+      if (!response.ok || !payload?.order) {
+        setSubmitError(payload?.error ?? "Não foi possível registrar o pedido.");
+        return;
+      }
+      persisted = payload.order;
+      setIdempotencyKey("");
+    }
+
+    const code = persisted?.code ?? `${data.settings.orderPrefix || "PED"}-${nextNumber}`;
+    const order: Order = {
+      id: persisted?.id ?? `order-${crypto.randomUUID()}`,
+      customerId: persisted?.customer_id ?? "",
+      code,
+      createdAt: persisted?.created_at ?? new Date().toISOString(),
+      customer,
+      items,
+      subtotal: persisted?.subtotal ?? calculation.subtotal,
+      discount: persisted?.discount ?? calculation.discount,
+      shipping: persisted?.shipping ?? calculation.shipping,
+      total: persisted?.total ?? calculation.total,
+      cashbackTotal: persisted?.cashback_total ?? calculation.cashback,
+      payment: values.payment,
+      status: persisted?.status ?? "Novo",
+      couponCode: coupon?.code ?? "",
+      internalNotes: "",
+      trackingCode: "",
+      orderSource: persisted?.order_source ?? "storefront",
+      reservationExpiresAt: persisted?.reservation_expires_at ?? "",
+    };
+    addOrder(order);
+    clearCart();
+    if (data.settings.checkoutMode === "whatsapp") {
+      window.location.assign(whatsappUrl(data.settings.whatsapp, renderWhatsappOrderMessage(order, data.settings)));
+      return;
+    }
+    router.push(storeHref(`/pedidos/${code}`));
+  }
+
+  if (!lines.length) {
+    return <section className="page-state container"><span className="section-kicker">FINALIZAR PEDIDO</span><h1>Seu carrinho está vazio.</h1><p>Adicione ao menos um produto antes de continuar.</p><Link className="button button-primary" href={storeHref("/#catalogo")}>Ver produtos</Link></section>;
+  }
+
+  return (
+    <section className="checkout-page container">
+      <Link className="back-link" href={storeHref("/")}><ArrowLeft /> Continuar comprando</Link>
+      <div className="checkout-page-heading"><span className="section-kicker">{data.settings.showPrices ? "FINALIZAR PEDIDO" : "SOLICITAR ORÇAMENTO"}</span><h1>{data.settings.showPrices ? "Revise e conclua seu pedido." : "Conte à equipe como podemos atender você."}</h1><p>{data.settings.showPrices ? "Ao finalizar, abriremos o WhatsApp com todos os dados para a equipe confirmar pagamento e envio." : "Registraremos os produtos e seus dados antes de abrir o atendimento pelo WhatsApp."}</p></div>
+      <div className="checkout-grid">
+        <form className="checkout-form" onSubmit={handleSubmit(submit)} noValidate>
+          <fieldset><legend>1. Dados para atendimento</legend><div className="form-grid"><Field label="Nome completo" error={errors.name?.message}><input autoComplete="name" {...register("name")} /></Field><Field label="WhatsApp" error={errors.phone?.message}><input inputMode="tel" autoComplete="tel" {...register("phone")} /></Field><Field label="E-mail" error={errors.email?.message} full><input type="email" autoComplete="email" {...register("email")} /></Field><Field label="Perfil" error={errors.profile?.message}><select {...register("profile")}><option>Profissional ou salão</option><option>Revendedor ou distribuidor</option><option>Cliente final</option></select></Field><Field label="Salão ou negócio" error={errors.business?.message}><input {...register("business")} /></Field><Field label="CNPJ (opcional)" error={errors.document?.message} full><input {...register("document")} /></Field></div></fieldset>
+          <fieldset><legend>2. Entrega</legend><div className="form-grid"><Field label="CEP" error={errors.zip?.message}><input inputMode="numeric" placeholder="00000-000" {...register("zip")} /></Field><Field label="Cidade" error={errors.city?.message}><input {...register("city")} /></Field><Field label="Estado" error={errors.state?.message}><select {...register("state")}><option value="">Selecione</option>{states.map((state) => <option key={state}>{state}</option>)}</select></Field><Field label="Endereço" error={errors.address?.message} full><input {...register("address")} /></Field><Field label="Número" error={errors.number?.message}><input {...register("number")} /></Field><Field label="Complemento" error={errors.complement?.message}><input {...register("complement")} /></Field></div></fieldset>
+          {data.settings.showPrices && <fieldset><legend>3. Pagamento</legend><div className="payment-options">{(["Pix", "Cartao", "Boleto"] as const).map((method) => <label key={method}><input type="radio" value={method} {...register("payment")} /><span><strong>{method === "Cartao" ? "Cartão" : method}</strong><small>{method === "Pix" ? `${data.settings.pixDiscount}% de desconto` : method === "Cartao" ? "Condição confirmada no atendimento" : "Instruções enviadas no atendimento"}</small></span></label>)}</div></fieldset>}
+          <fieldset><legend>{data.settings.showPrices ? "4. Observações" : "3. Observações"}</legend><Field label="Conte o que você precisa" error={errors.notes?.message} full><textarea rows={4} {...register("notes")} /></Field></fieldset>
+          <fieldset className="checkout-terms"><legend><AlertTriangle /> {checkoutTerms.title}</legend><div className="checkout-terms-content"><p className="terms-positive">✅ {checkoutTerms.videoRequirement}</p><p className="terms-negative">❌ {checkoutTerms.noVideoWarning}</p><p className="terms-positive">✅ {checkoutTerms.agreement}</p><p className="terms-positive">✅ {checkoutTerms.sellerResponsibility}</p><div className="terms-exclusions"><strong>❌ Não nos responsabilizamos por:</strong><ul>{checkoutTerms.exclusions.map((item) => <li key={item}>{item}</li>)}</ul></div></div><label className="terms-acceptance"><input type="checkbox" {...register("termsAccepted")} /><span><strong>Declaração:</strong> {checkoutTerms.declaration}</span></label>{errors.termsAccepted && <small className="field-error">{errors.termsAccepted.message}</small>}</fieldset>
+          <label className="checkout-honeypot" aria-hidden="true">Não preencha<input tabIndex={-1} autoComplete="off" {...register("botField")} /></label>
+          <input type="hidden" {...register("startedAt")} />
+          <label className="consent-line"><input type="checkbox" {...register("consent")} /><span>Autorizo o envio dos dados deste pedido para o atendimento da loja pelo WhatsApp.</span></label>{errors.consent && <small className="field-error">{errors.consent.message}</small>}
+          <TurnstileWidget onToken={handleTurnstileToken} />
+          {submitError && <p className="field-error" role="alert">{submitError}</p>}
+          <button className="button button-primary button-full button-large" type="submit" disabled={isSubmitting}><LockKeyhole /> {data.settings.showPrices ? "Enviar pedido pelo WhatsApp" : "Registrar e abrir o WhatsApp"}</button>
+        </form>
+        <aside className="checkout-summary"><span>PRODUTOS SELECIONADOS</span>{cartProducts.map(({ line, product }) => <div className="summary-item" key={line.productId}><i>{data.settings.orderPrefix}</i><div><strong>{product!.name}</strong><small>{line.quantity} unidade{line.quantity > 1 ? "s" : ""}{data.settings.showPrices && product!.cashback > 0 ? ` · ${formatMoney(product!.cashback * line.quantity)} de cashback` : ""}</small></div>{data.settings.showPrices && <b>{formatMoney(product!.price * line.quantity)}</b>}</div>)}{data.settings.showPrices && <div className="summary-totals"><div><span>Subtotal</span><strong>{formatMoney(calculation.subtotal)}</strong></div><div><span>Descontos</span><strong>- {formatMoney(calculation.discount)}</strong></div><div><span>Frete</span><strong>{calculation.shipping ? formatMoney(calculation.shipping) : "Grátis"}</strong></div><div className="grand-total"><span>Total</span><strong>{formatMoney(calculation.total)}</strong></div>{calculation.cashback > 0 && <div className="cashback-total"><span>Cashback previsto</span><strong>+ {formatMoney(calculation.cashback)}</strong></div>}</div>}<p className="summary-demo"><CheckCircle2 /> {data.settings.showPrices ? "Pagamento e envio serão confirmados pela equipe." : "Preço, disponibilidade e entrega serão confirmados no atendimento."}</p></aside>
+      </div>
+    </section>
+  );
+}
+
+function Field({ label, error, full, children }: { label: string; error?: string; full?: boolean; children: React.ReactNode }) {
+  return <label className={full ? "form-full" : ""}><span>{label}</span>{children}{error && <small className="field-error">{error}</small>}</label>;
+}

@@ -1,71 +1,45 @@
-# Site Autêntica Professional
+# Autêntica Professional — catálogo interativo e painel administrativo
 
-Site institucional estático da Autêntica Professional, preparado para posicionamento de marca, geração de demanda, SEO técnico e descoberta por mecanismos de busca e sistemas de IA.
+Instância white-label criada a partir do núcleo MV3 Catalog. A loja e o painel
+administrativo vivem na mesma aplicação Next.js e compartilham os dados do
+Supabase exclusivo da Autêntica.
 
-## Páginas principais
-
-- `/`: site institucional.
-- `/catalogo.html`: catálogo interativo com busca, filtros, pedido e WhatsApp.
-- `/links.html`: árvore de links para a bio do Instagram.
-- `/produtos/{slug}/`: 34 páginas indexáveis de produto.
-- `/guias/`: conteúdos editoriais sobre cuidado capilar.
-- `/obrigado/`: confirmação do formulário comercial.
-
-## SEO e descoberta
-
-- HTML semântico e conteúdo principal renderizado no documento.
-- Metadados, URLs canônicas, Open Graph e Twitter Card.
-- Dados estruturados de organização, site, FAQ, artigos, produtos e breadcrumbs.
-- `sitemap.xml`, `robots.txt`, `llms.txt` e `produtos.json`.
-- Links internos entre homepage, catálogo, guias e produtos.
-- Páginas editoriais para buscas conversacionais.
-
-## Formulário comercial
-
-O formulário usa Netlify Forms com o nome `contato-comercial` e redireciona para `/obrigado/`.
-
-Depois da publicação, habilite a detecção de formulários no Netlify e configure a notificação em **Project configuration > Notifications**.
-
-## Pedido pelo WhatsApp
-
-- Quantidade configurável em cada produto.
-- Pedido persistido no navegador.
-- Pré-qualificação com nome, perfil, salão/negócio, cidade, CEP, endereço, CNPJ opcional e observações.
-- Mensagem pronta para `+55 31 98567-4049`, com produtos e quantidades.
-- Nenhum preço B2B ou B2C é exposto publicamente.
-- Resultados do teste operacional em `TESTE-DE-ESTRESSE.md`.
-
-## Árvore de links
-
-`links.html` possui quatro caminhos:
-
-- WhatsApp B2B para profissionais e salões.
-- WhatsApp B2C para uso pessoal.
-- Catálogo interativo com parâmetros UTM.
-- Site institucional com parâmetros UTM.
-
-O SLA e o padrão operacional estão em `OPERACAO-WHATSAPP.md`.
-
-## Gerar páginas de produto
-
-As páginas usam os dados de `app.js`. Depois de alterar o portfólio, execute:
+## Rodar localmente
 
 ```bash
-SITE_URL=https://seu-dominio.com node scripts/generate-product-pages.mjs
+pnpm install
+pnpm dev
 ```
 
-O script recria as 34 páginas, `produtos.json` e `sitemap.xml`. Neste ambiente, pode ser necessário usar o caminho completo do Node fornecido pelo Codex.
+- Loja: http://localhost:3000
+- Painel: http://localhost:3000/admin
+- Login local: `admin@autentica.demo`
+- Senha local: `autentica-demo-123`
 
-## Domínio
+## Personalização
 
-As URLs canônicas atuais usam `https://autentica-professional-catalogo.netlify.app`. Troque esse endereço pelo domínio institucional definitivo antes de enviar o sitemap ao Google Search Console.
+As configurações de identidade ficam em `.env.local`. Produtos, categorias,
+banners, páginas, cores e dados operacionais podem ser alterados no painel. O
+seed inicial contém os 34 produtos e as 20 categorias migradas do catálogo
+original, com filtros por necessidade e perfil de atendimento.
 
-## Desenvolvimento local
+## Supabase
 
-O projeto não exige instalação ou build. Sirva a raiz com qualquer servidor HTTP estático:
+O projeto Supabase exclusivo já reservado para esta instância usa o ref
+`ibxucjvllribciyfjlee`. Configure as três variáveis do Supabase em `.env.local`,
+aplique as migrações em ordem e execute `supabase/seed.sql`. Nunca reutilize
+banco, chaves de serviço ou usuários entre clientes.
 
-```bash
-python3 -m http.server 4173
-```
+## Operação
 
-Acesse `http://127.0.0.1:4173/`.
+Esta base registra uma solicitação de orçamento e abre a mensagem pronta no
+WhatsApp da loja. Preços, disponibilidade, pagamento e entrega são confirmados
+no atendimento. A aplicação não realiza cobrança automática.
+
+## Publicação
+
+A prévia deve ser publicada em um projeto Vercel exclusivo da Autêntica. A
+branch de migração pode operar na Vercel sem alterar o site legado da Netlify;
+domínio e DNS só devem ser trocados após homologação explícita.
+
+Veja também [docs/reusable-base.md](docs/reusable-base.md).

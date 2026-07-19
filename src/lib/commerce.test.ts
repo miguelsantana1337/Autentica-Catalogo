@@ -1,0 +1,81 @@
+import { describe, expect, it } from "vitest";
+import { calculateCart, discountPercent, isCouponValid, stockLabel } from "./commerce";
+import { seedData } from "@/data/seed.generic";
+
+describe("calculateCart", () => {
+  const product = seedData.products[0];
+
+  it("mantem o carrinho vazio sem frete ou total", () => {
+    expect(calculateCart([], seedData.products, seedData.settings)).toEqual({
+      items: 0,
+      subtotal: 0,
+      couponDiscount: 0,
+      paymentDiscount: 0,
+      discount: 0,
+      shipping: 0,
+      total: 0,
+      cashback: 0,
+    });
+  });
+
+  it("aplica cupom, desconto Pix e frete gratis na ordem correta", () => {
+    const quantity = 3;
+    const result = calculateCart(
+      [{ productId: product.id, quantity }],
+      seedData.products,
+      seedData.settings,
+      seedData.coupons[0],
+      "Pix",
+    );
+
+    const subtotal = product.price * quantity;
+    const couponDiscount = subtotal * (seedData.coupons[0].value / 100);
+    const paymentDiscount = (subtotal - couponDiscount) * (seedData.settings.pixDiscount / 100);
+
+    expect(result.subtotal).toBeCloseTo(subtotal);
+    expect(result.couponDiscount).toBeCloseTo(couponDiscount);
+    expect(result.paymentDiscount).toBeCloseTo(paymentDiscount);
+    expect(result.shipping).toBe(0);
+    expect(result.total).toBeCloseTo(subtotal - couponDiscount - paymentDiscount);
+    expect(result.cashback).toBe(product.cashback * quantity);
+  });
+
+  it("limita quantidade e contagem ao estoque disponivel", () => {
+    const result = calculateCart(
+      [{ productId: product.id, quantity: 999 }],
+      seedData.products,
+      seedData.settings,
+    );
+
+    expect(result.items).toBe(product.stock);
+    expect(result.subtotal).toBeCloseTo(product.price * product.stock);
+    expect(result.cashback).toBeCloseTo(product.cashback * product.stock);
+  });
+
+  it("cobra o frete fixo quando a regra de frete gratis esta desativada", () => {
+    const result = calculateCart(
+      [{ productId: product.id, quantity: 1 }],
+      seedData.products,
+      { ...seedData.settings, freeShippingEnabled: false },
+    );
+
+    expect(result.shipping).toBe(seedData.settings.shippingFlat);
+  });
+});
+
+describe("regras auxiliares", () => {
+  it("rejeita cupom expirado", () => {
+    expect(
+      isCouponValid(
+        { ...seedData.coupons[0], expiresAt: "2025-01-01" },
+        1000,
+        new Date("2026-07-13T12:00:00"),
+      ),
+    ).toBe(false);
+  });
+
+  it("informa estoque e percentual de desconto", () => {
+    expect(stockLabel({ ...seedData.products[0], stock: 0 })).toEqual({ label: "Esgotado", tone: "out" });
+    expect(discountPercent({ ...seedData.products[0], price: 80, compareAt: 100 })).toBe(20);
+  });
+});
