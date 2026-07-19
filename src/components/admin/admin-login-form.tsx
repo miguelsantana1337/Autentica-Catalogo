@@ -10,7 +10,7 @@ export function AdminLoginForm({ demoEmail, demoPassword, demoMode, notice = "" 
   return (
     <div className="admin-login-page">
       <form className="admin-login-card" action={action}>
-        <span className="admin-badge">PAINEL NEXT</span>
+        <span className="admin-badge">PAINEL AUTÊNTICA</span>
         <h1>Administracao da loja</h1>
         <p>{demoMode ? "Use as credenciais abaixo para testar o painel local." : "Entre com o administrador cadastrado no Supabase Auth."}</p>
         <label>E-mail<input name="email" type="email" required defaultValue={demoMode ? demoEmail : ""} autoComplete="email" /></label>
